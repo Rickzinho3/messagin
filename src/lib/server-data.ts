@@ -9,14 +9,26 @@ type MessageRow = {
     created_at: string;
 };
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
 function requireSupabase() {
-    if (!supabaseUrl || !supabaseKey) {
-        throw new Error("Supabase não está configurado na Vercel");
+    const rawUrl =
+        process.env.NEXT_PUBLIC_SUPABASE_URL ||
+        process.env.SUPABASE_URL;
+    const rawKey =
+        process.env.SUPABASE_SERVICE_ROLE_KEY ||
+        process.env.SUPABASE_KEY ||
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+    if (!rawUrl || !rawKey) {
+        const missing: string[] = [];
+        if (!rawUrl) missing.push("NEXT_PUBLIC_SUPABASE_URL");
+        if (!rawKey) missing.push("SUPABASE_SERVICE_ROLE_KEY");
+        throw new Error(`Variáveis ausentes: ${missing.join(", ")}`);
     }
-    return { url: supabaseUrl, key: supabaseKey };
+
+    const url = rawUrl.trim().replace(/\/+$/, "");
+    const key = rawKey.trim();
+
+    return { url, key };
 }
 
 async function supabaseRequest<T>(
@@ -36,8 +48,9 @@ async function supabaseRequest<T>(
     });
 
     if (!response.ok) {
+        const errorText = await response.text();
         throw new Error(
-            `Supabase ${response.status}: ${await response.text()}`,
+            `Supabase ${response.status}: ${errorText}`,
         );
     }
 

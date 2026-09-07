@@ -23,6 +23,9 @@ async function sendOneSignalPush(input: {
     from: string;
     message: string;
 }) {
+    const oneSignalAppId = process.env.NEXT_PUBLIC_ONESIGNAL_APP_ID?.trim();
+    const oneSignalApiKey = process.env.ONESIGNAL_REST_API_KEY?.trim();
+
     if (!oneSignalAppId || !oneSignalApiKey) {
         throw new Error("OneSignal não está configurado na Vercel");
     }
@@ -76,6 +79,9 @@ export async function POST(request: NextRequest) {
         const row = await createMessage({ room, from, to, message, type });
         let push: "sent" | "failed" | "not_configured" = "not_configured";
 
+        const oneSignalAppId = process.env.NEXT_PUBLIC_ONESIGNAL_APP_ID?.trim();
+        const oneSignalApiKey = process.env.ONESIGNAL_REST_API_KEY?.trim();
+
         try {
             await sendOneSignalPush({ room, to, from, message });
             push = "sent";
@@ -85,11 +91,13 @@ export async function POST(request: NextRequest) {
             console.error("Falha no OneSignal:", error);
         }
 
-        return NextResponse.json({ success: true, id: row.id, push });
+        return NextResponse.json({ success: true, id: row?.id, push });
     } catch (error) {
         console.error("Falha ao criar mensagem:", error);
+        const errorMessage =
+            error instanceof Error ? error.message : "Erro desconhecido";
         return NextResponse.json(
-            { error: "Não foi possível enviar" },
+            { error: `Não foi possível enviar: ${errorMessage}` },
             { status: 500 },
         );
     }
