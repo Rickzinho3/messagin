@@ -1,57 +1,30 @@
-# Notificações Safadas 🔥
+# Private Signal
 
-App Next.js pra trocar mensagens quentes com **notificações na barra de status** do celular.
+Aplicação Next.js para mensagens privadas entre duas pessoas, com persistência no Supabase e notificações push pelo OneSignal.
 
-## O que você precisa fazer (obrigatório pro push funcionar)
+## Configuração
 
-### 1. Gerar as chaves VAPID
-```bash
-npx web-push generate-vapid-keys
+1. No Supabase, abra o SQL Editor e execute [`supabase/schema.sql`](supabase/schema.sql).
+2. Na Vercel, adicione estas variáveis:
+
+```env
+NEXT_PUBLIC_ONESIGNAL_APP_ID=
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
+ONESIGNAL_REST_API_KEY=
 ```
 
-Vai aparecer algo assim:
-```
-Public Key: BEl62iUYgUivxIkv69yViEuiBIa-Ib27...
-Private Key: 3K7v... 
-```
+3. No OneSignal, configure o app Web com o domínio publicado na Vercel.
+4. Faça redeploy na Vercel depois de cadastrar as variáveis.
 
-### 2. Colocar as chaves no código
+`SUPABASE_SERVICE_ROLE_KEY` e `ONESIGNAL_REST_API_KEY` são secrets de servidor. Nunca os exponha no frontend ou no GitHub.
 
-**Arquivo 1:** `src/app/page.tsx`  
-Procure por:
-```ts
-const VAPID_PUBLIC_KEY = "COLE_SUA_VAPID_PUBLIC_KEY_AQUI";
-```
-Cole a **Public Key**.
+## Desenvolvimento
 
-**Arquivo 2:** `src/app/api/notify/route.ts`  
-Procure por:
-```ts
-const VAPID_PUBLIC_KEY = "COLE_SUA_VAPID_PUBLIC_KEY_AQUI";
-const VAPID_PRIVATE_KEY = "COLE_SUA_VAPID_PRIVATE_KEY_AQUI";
-```
-Cole as duas chaves (Public + Private).
-
-### 3. Instalar e rodar
 ```bash
 npm install
 npm run dev
 ```
 
-### 4. Testar
-- Abre no celular (ou Chrome)
-- Entra na sala
-- Quando pedir permissão de notificação → **Permitir**
-- A outra pessoa faz o mesmo (mesmo código de sala)
-- Manda uma mensagem → deve aparecer na barra de status
-
-> **Importante:**  
-> - Funciona melhor em HTTPS (ou localhost)  
-> - No iPhone o suporte a Web Push ainda é limitado  
-> - No Android + Chrome funciona bem  
-> - As mensagens em memória somem se você reiniciar o servidor
-
-## Estrutura
-- `/api/notify` → backend (mensagens + push)
-- `public/sw.js` → Service Worker (mostra a notificação)
-- `public/manifest.json` → PWA
+O fluxo é dividido em entrada, sala, compositor e caixa de entrada. A sessão de nome e sala fica no navegador; as mensagens ficam no Supabase.

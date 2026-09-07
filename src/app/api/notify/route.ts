@@ -1,59 +1,70 @@
 import { NextRequest, NextResponse } from "next/server";
+import {
+    createMessage,
+    listMessages,
+    markMessageRead,
+    toMessage,
+} from "@/lib/server-data";
 
-// ============================================================
-//  COLOQUE AQUI AS SUAS CHAVES VAPID
-//  Gere com o comando:  npx web-push generate-vapid-keys
-// ============================================================
-const VAPID_PUBLIC_KEY = process.env.VAPID_PUBLIC_KEY || "";
-const VAPID_PRIVATE_KEY = process.env.VAPID_PRIVATE_KEY || "";
-const VAPID_SUBJECT = process.env.VAPID_SUBJECT || "mailto:admin@example.com";
+const oneSignalAppId = process.env.NEXT_PUBLIC_ONESIGNAL_APP_ID;
+const oneSignalApiKey = process.env.ONESIGNAL_REST_API_KEY;
 
-// Stores em memória (resetam quando o servidor reinicia)
-const rooms = new Map<
-    string,
-    Array<{
-        id: string;
-        from: string;
-        to: string;
-        message: string;
-        type: string;
-        createdAt: number;
-        read: boolean;
-    }>
->();
+function normalize(value: unknown) {
+    return typeof value === "string" ? value.trim() : "";
+}
 
-// roomKey -> Map<userNameLower, PushSubscriptionJSON>
-const subscriptions = new Map<string, Map<string, any>>();
+function externalId(room: string, user: string) {
+    return `${room.toLowerCase()}:${user.toLowerCase()}`;
+}
 
-export async function POST(req: NextRequest) {
+async function sendOneSignalPush(input: {
+    room: string;
+    to: string;
+    from: string;
+    message: string;
+}) {
+    if (!oneSignalAppId || !oneSignalApiKey) {
+        throw new Error("OneSignal não está configurado na Vercel");
+    }
+
+    const response = await fetch("https://api.onesignal.com/notifications", {
+        method: "POST",
+        headers: {
+            Authorization: `Key ${oneSignalApiKey}`,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            app_id: oneSignalAppId,
+            target_channel: "push",
+            include_aliases: {
+                external_id: [externalId(input.room, input.to)],
+            },
+            headings: { en: `${input.from} lembrou de você` },
+            contents: {
+                en:
+                    input.message.length > 100
+                        ? `${input.message.slice(0, 97)}...`
+                        : input.message,
+            },
+            url: "/",
+        }),
+    });
+
+    if (!response.ok) {
+        throw new Error(
+            `OneSignal ${response.status}: ${await response.text()}`,
+        );
+    }
+}
+
+export async function POST(request: NextRequest) {
     try {
-        const body = await req.json();
-
-        // === Registrar subscription de push ===
-        if (body.action === "subscribe") {
-            const { room, user, subscription } = body;
-            if (!room || !user || !subscription) {
-                return NextResponse.json(
-                    { error: "Dados incompletos" },
-                    { status: 400 },
-                );
-            }
-            const roomKey = room.toLowerCase().trim();
-            if (!subscriptions.has(roomKey)) {
-                subscriptions.set(roomKey, new Map());
-            }
-            subscriptions
-                .get(roomKey)!
-                .set(user.toLowerCase().trim(), subscription);
-            console.log(`Subscription salva: ${user} na sala ${roomKey}`);
-            return NextResponse.json({
-                success: true,
-                message: "Subscription salva",
-            });
-        }
-
-        // === Enviar mensagem + tentar push ===
-        const { room, from, to, message, type } = body;
+        const body = await request.json();
+        const room = normalize(body.room).toUpperCase();
+        const from = normalize(body.from);
+        const to = normalize(body.to);
+        const message = normalize(body.message);
+        const type = normalize(body.type) || "custom";
 
         if (!room || !from || !to || !message) {
             return NextResponse.json(
@@ -62,101 +73,57 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        const roomKey = room.toLowerCase().trim();
-        if (!rooms.has(roomKey)) {
-            rooms.set(roomKey, []);
-        }
+        const row = await createMessage({ room, from, to, message, type });
+        let push: "sent" | "failed" | "not_configured" = "not_configured";
 
-        const msg = {
-            id: crypto.randomUUID(),
-            from,
-            to,
-            message,
-            type: type || "custom",
-            createdAt: Date.now(),
-            read: false,
-        };
-
-        rooms.get(roomKey)!.push(msg);
-
-        // Limita a 50 mensagens por room
-        const list = rooms.get(roomKey)!;
-        if (list.length > 50) {
-            rooms.set(roomKey, list.slice(-50));
-        }
-
-        // Tenta enviar push notification para o destinatário
         try {
-            const roomSubs = subscriptions.get(roomKey);
-            const sub = roomSubs?.get(to.toLowerCase().trim());
-
-            if (sub && VAPID_PRIVATE_KEY.trim() && VAPID_PUBLIC_KEY.trim()) {
-                // Dynamic import pra não quebrar se web-push não estiver instalado
-                const webpush = (await import("web-push")).default;
-                webpush.setVapidDetails(
-                    VAPID_SUBJECT,
-                    VAPID_PUBLIC_KEY,
-                    VAPID_PRIVATE_KEY,
-                );
-
-                await webpush.sendNotification(
-                    sub,
-                    JSON.stringify({
-                        title: `🔥 ${from} lembrou de você`,
-                        body:
-                            message.length > 90
-                                ? message.substring(0, 87) + "..."
-                                : message,
-                        url: "/",
-                    }),
-                );
-                console.log(`Push enviado para ${to}`);
-            } else {
-                console.log(
-                    "Push não enviado: chaves VAPID não configuradas ou usuário sem subscription",
-                );
-            }
-        } catch (pushErr: any) {
-            console.error("Erro ao enviar push:", pushErr?.message || pushErr);
-            // Não falha o envio da mensagem se o push der erro
+            await sendOneSignalPush({ room, to, from, message });
+            push = "sent";
+        } catch (error) {
+            push =
+                oneSignalAppId && oneSignalApiKey ? "failed" : "not_configured";
+            console.error("Falha no OneSignal:", error);
         }
 
-        return NextResponse.json({ success: true, id: msg.id });
-    } catch (e) {
-        console.error(e);
-        return NextResponse.json({ error: "Erro interno" }, { status: 500 });
-    }
-}
-
-export async function GET(req: NextRequest) {
-    const { searchParams } = new URL(req.url);
-    const room = searchParams.get("room");
-    const forUser = searchParams.get("for");
-
-    if (!room) {
+        return NextResponse.json({ success: true, id: row.id, push });
+    } catch (error) {
+        console.error("Falha ao criar mensagem:", error);
         return NextResponse.json(
-            { error: "Room obrigatória" },
-            { status: 400 },
+            { error: "Não foi possível enviar" },
+            { status: 500 },
         );
     }
-
-    const roomKey = room.toLowerCase().trim();
-    const list = rooms.get(roomKey) || [];
-
-    let filtered = list;
-    if (forUser) {
-        filtered = list.filter(
-            (m) => m.to.toLowerCase() === forUser.toLowerCase() && !m.read,
-        );
-    }
-
-    return NextResponse.json({ messages: filtered });
 }
 
-export async function PATCH(req: NextRequest) {
+export async function GET(request: NextRequest) {
     try {
-        const body = await req.json();
-        const { room, id } = body;
+        const params = request.nextUrl.searchParams;
+        const room = normalize(params.get("room")).toUpperCase();
+        const recipient = normalize(params.get("for"));
+
+        if (!room || !recipient) {
+            return NextResponse.json(
+                { error: "Sala e destinatário são obrigatórios" },
+                { status: 400 },
+            );
+        }
+
+        const rows = await listMessages(room, recipient);
+        return NextResponse.json({ messages: rows.map(toMessage) });
+    } catch (error) {
+        console.error("Falha ao listar mensagens:", error);
+        return NextResponse.json(
+            { error: "Não foi possível carregar mensagens" },
+            { status: 500 },
+        );
+    }
+}
+
+export async function PATCH(request: NextRequest) {
+    try {
+        const body = await request.json();
+        const room = normalize(body.room).toUpperCase();
+        const id = normalize(body.id);
 
         if (!room || !id) {
             return NextResponse.json(
@@ -165,15 +132,13 @@ export async function PATCH(req: NextRequest) {
             );
         }
 
-        const roomKey = room.toLowerCase().trim();
-        const list = rooms.get(roomKey) || [];
-        const msg = list.find((m) => m.id === id);
-        if (msg) {
-            msg.read = true;
-        }
-
+        await markMessageRead(room, id);
         return NextResponse.json({ success: true });
-    } catch {
-        return NextResponse.json({ error: "Erro" }, { status: 500 });
+    } catch (error) {
+        console.error("Falha ao marcar mensagem:", error);
+        return NextResponse.json(
+            { error: "Não foi possível marcar mensagem" },
+            { status: 500 },
+        );
     }
 }

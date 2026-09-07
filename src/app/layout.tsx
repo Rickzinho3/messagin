@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { OneSignalBootstrap } from "@/components/OneSignalBootstrap";
 
 export const metadata: Metadata = {
     title: "Notificações Safadas 🔥",
@@ -32,7 +33,10 @@ export default function RootLayout({
                 <meta name="mobile-web-app-capable" content="yes" />
                 <meta name="apple-mobile-web-app-capable" content="yes" />
             </head>
-            <body>{children}</body>
+            <body>
+                <OneSignalBootstrap />
+                {children}
+            </body>
         </html>
     );
 }
