@@ -275,7 +275,7 @@ select {
 .room-hero {
     display: flex;
     justify-content: space-between;
-        align-items: flex-end;
+    align-items: flex-end;
     gap: 30px;
     padding: 90px 0 45px;
 }
@@ -465,7 +465,7 @@ textarea {
 .inbox-heading {
     display: flex;
     justify-content: space-between;
-        align-items: flex-end;
+    align-items: flex-end;
     margin: 90px 0 50px;
 }
 .inbox-heading h1 {
