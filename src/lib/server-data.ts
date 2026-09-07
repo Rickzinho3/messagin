@@ -9,14 +9,21 @@ type MessageRow = {
     created_at: string;
 };
 
+function cleanEnvValue(value?: string) {
+    if (!value) return "";
+    return value.trim().replace(/^["']|["']$/g, "").trim();
+}
+
 function requireSupabase() {
-    const rawUrl =
+    const rawUrl = cleanEnvValue(
         process.env.NEXT_PUBLIC_SUPABASE_URL ||
-        process.env.SUPABASE_URL;
-    const rawKey =
+        process.env.SUPABASE_URL,
+    );
+    const rawKey = cleanEnvValue(
         process.env.SUPABASE_SERVICE_ROLE_KEY ||
         process.env.SUPABASE_KEY ||
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+    );
 
     if (!rawUrl || !rawKey) {
         const missing: string[] = [];
@@ -25,10 +32,14 @@ function requireSupabase() {
         throw new Error(`Variáveis ausentes: ${missing.join(", ")}`);
     }
 
-    const url = rawUrl.trim().replace(/\/+$/, "");
-    const key = rawKey.trim();
+    if (rawUrl.includes("your-project.supabase.co")) {
+        throw new Error(
+            `NEXT_PUBLIC_SUPABASE_URL está com o valor de exemplo (${rawUrl}). Atualize na Vercel com a URL real do seu projeto.`,
+        );
+    }
 
-    return { url, key };
+    const url = rawUrl.replace(/\/+$/, "");
+    return { url, key: rawKey };
 }
 
 async function supabaseRequest<T>(
@@ -36,25 +47,38 @@ async function supabaseRequest<T>(
     init?: RequestInit,
 ): Promise<T> {
     const config = requireSupabase();
-    const response = await fetch(`${config.url}/rest/v1/${path}`, {
-        ...init,
-        headers: {
-            apikey: config.key,
-            Authorization: `Bearer ${config.key}`,
-            "Content-Type": "application/json",
-            ...(init?.headers || {}),
-        },
-        cache: "no-store",
-    });
+    const endpoint = `${config.url}/rest/v1/${path}`;
 
-    if (!response.ok) {
-        const errorText = await response.text();
+    try {
+        const response = await fetch(endpoint, {
+            ...init,
+            headers: {
+                apikey: config.key,
+                Authorization: `Bearer ${config.key}`,
+                "Content-Type": "application/json",
+                ...(init?.headers || {}),
+            },
+            cache: "no-store",
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(
+                `Supabase ${response.status}: ${errorText}`,
+            );
+        }
+
+        return response.status === 204 ? (undefined as T) : response.json();
+    } catch (err) {
+        if (err instanceof Error && err.message.includes("Supabase")) {
+            throw err;
+        }
+        const cause = (err as { cause?: { code?: string; message?: string } })?.cause;
+        const causeMsg = cause?.code || cause?.message || "";
         throw new Error(
-            `Supabase ${response.status}: ${errorText}`,
+            `Falha ao conectar em ${config.url} (${causeMsg || "URL inacessível"}). Verifique NEXT_PUBLIC_SUPABASE_URL na Vercel.`,
         );
     }
-
-    return response.status === 204 ? (undefined as T) : response.json();
 }
 
 export async function createMessage(input: {
