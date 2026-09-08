@@ -135,7 +135,7 @@ export default function InboxPage() {
                                 </p>
                                 <div className="flex justify-end pt-2">
                                     <button
-                                        className="text-xs tracking-wider text-[#a69b9d] hover:text-[#ee8b8d] transition-colors cursor-pointer bg-transparent border-0"
+                                        className="text-xs flex bg-gradient-to-r from-[#ee8b8d] px-2 py-3 rounded-xl to-[#ffb0a7] text-[#100d10] items-center gap-2 tracking-wider transition-colors cursor-pointer border-0"
                                         onClick={() => markRead(message.id)}
                                     >
                                         Marcar como lida <Check color="#a69b9d" size={16} />
