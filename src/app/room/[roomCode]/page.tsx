@@ -64,7 +64,7 @@ export default function RoomPage() {
         session.gender === "ele" ? heatMessagesForHer : heatMessageForHim;
 
     return (
-        <div className="min-h-screen w-full flex flex-col items-center justify-center bg-[#100d10] text-[#f4eee9]">
+        <div className="min-h-screen overflow-y-hidden w-full flex flex-col items-center justify-center bg-[#100d10] text-[#f4eee9]">
             {/* Header Fixo */}
             <header className="sticky top-0 z-50 h-15 w-full backdrop-blur-md bg-[#100d10]/75 border-b border-white/[0.08] px-4 sm:px-8 py-3.5 flex justify-between items-center">
                 <button
@@ -81,7 +81,7 @@ export default function RoomPage() {
                 </Link>
             </header>
 
-            <main className="flex-1 w-full overflow-hidden max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex flex-col gap-8 sm:gap-10">
+            <main className="flex-1 w-full max-h-screen max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex flex-col gap-8 sm:gap-10">
                 <section className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 pb-6 border-b border-white/[0.08]">
                     <div className="flex flex-col gap-2 max-w-xl">
                         <h1 className="text-3xl sm:text-7xl max-w-80 font-bold tracking-tight text-[#f4eee9]">
