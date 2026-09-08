@@ -11,7 +11,7 @@ import {
     randomMessage,
 } from "@/lib/messages";
 import { readSession, clearSession, Session } from "@/lib/session";
-import { ArrowLeft3, ArrowRight3, DirectInbox, DirectRight, Edit2, Heart, HeartEdit, Lovely } from "iconsax-reactjs";
+import { ArrowLeft3, ArrowRight3, DirectInbox, DirectRight, Edit, Edit2, Heart, HeartEdit, Lovely } from "iconsax-reactjs";
 import { Loader } from "@/components/motion/loader";
 
 export default function RoomPage() {
@@ -74,7 +74,7 @@ export default function RoomPage() {
                     <ArrowLeft3 color="#a69b9d" size={16} /> Sair da sala
                 </button>
                 <Link href={`/room/${room}/inbox`} className="relative font-mono text-xs uppercase tracking-widest text-[#f4eee9] hover:text-[#ffb0a7] transition-colors">
-                    <DirectInbox color="#a69d9d" className="size-6"/>
+                    <DirectInbox variant="Bulk" color="#a69d9d" className="size-6"/>
                     {hasUnread && (
                       <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full" />
                     )}
@@ -84,8 +84,8 @@ export default function RoomPage() {
             <main className="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex flex-col gap-8 sm:gap-10">
                 <section className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 pb-6 border-b border-white/[0.08]">
                     <div className="flex flex-col gap-2 max-w-xl">
-                        <h1 className="text-3xl sm:text-7xl max-w-100 font-bold tracking-tight text-[#f4eee9]">
-                            {session.name}, <em className="font-serif italic text-7xl font-normal text-[#ffb0a7]">escolha o tom.</em>
+                        <h1 className="text-3xl sm:text-7xl max-w-80 font-bold tracking-tight text-[#f4eee9]">
+                            {session.name}, <em className="font-serif italic font-normal text-[#ffb0a7]">escolha o tom.</em>
                         </h1>
                         <p className="text-sm sm:text-base text-[#a69b9d] leading-relaxed">
                             Envie um sinal para <strong className="text-[#ffb0a7] font-semibold">{session.otherName}</strong>.
@@ -102,7 +102,7 @@ export default function RoomPage() {
                     >
                         <div className="flex flex-col gap-4">
                             <span className="flex items-center gap-1 text-xs tracking-widest text-[#a69b9d]">
-                                Leve <Heart color="#a69b9d" size={14}/>
+                                Leve <Heart variant="Bulk" color="#a69b9d" size={14}/>
                             </span>
                             <strong className="text-xl sm:text-2xl font-semibold leading-snug text-[#f4eee9] group-hover:text-white transition-colors">
                                 Uma lembrança
@@ -119,7 +119,7 @@ export default function RoomPage() {
                     >
                         <div className="flex flex-col gap-4">
                             <span className="flex items-center gap-1 text-xs tracking-widest text-[#ee8b8d]">
-                                Quente <Lovely color="#ee8b8d" size={14}/>
+                                Quente <Lovely variant="Bulk" color="#ee8b8d" size={14}/>
                             </span>
                             <strong className="text-xl sm:text-2xl font-semibold leading-snug text-[#f4eee9] group-hover:text-[#ffb0a7] transition-colors">
                                 Deixar a noite
@@ -136,7 +136,7 @@ export default function RoomPage() {
                     >
                         <div className="flex flex-col gap-4">
                             <span className="flex items-center gap-1 text-xs tracking-widest text-[#a69b9d]">
-                                Personalizado <Edit2 color="#a69b9d" size={14}/>
+                                Personalizado <HeartEdit variant="Bulk" color="#a69b9d" size={14}/>
                             </span>
                             <strong className="text-xl sm:text-2xl font-semibold leading-snug text-[#f4eee9] group-hover:text-white transition-colors">
                                 Escreva exatamente
