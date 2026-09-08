@@ -80,7 +80,7 @@ export default function ComposePage() {
             <section className="compose-layout">
                 <div className="section-intro">
                     <span className="eyebrow">COMPOSITOR / {type}</span>
-                    <h1>O que você quer que apareça na tela dela?</h1>
+                    <h1>O que você quer que apareça para a pessoa?</h1>
                     <p>
                         Uma boa notificação chega curta, inesperada e impossível
                         de ignorar.

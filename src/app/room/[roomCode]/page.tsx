@@ -4,7 +4,12 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { connectPush } from "@/components/OneSignalBootstrap";
-import { heatMessages, lightMessages, randomMessage } from "@/lib/messages";
+import {
+    heatMessageForHim,
+    heatMessagesForHer,
+    lightMessages,
+    randomMessage,
+} from "@/lib/messages";
 import { readSession, clearSession, Session } from "@/lib/session";
 
 export default function RoomPage() {
@@ -36,6 +41,9 @@ export default function RoomPage() {
         clearSession();
         router.push("/");
     }
+
+    const heatList =
+        session.gender === "ele" ? heatMessagesForHer : heatMessageForHim;
 
     return (
         <main className="page-frame room-page">
@@ -80,7 +88,7 @@ export default function RoomPage() {
                     <span className="card-action">abrir sinal ↗</span>
                 </Link>
                 <Link
-                    href={`/room/${room}/compose?type=heat&message=${encodeURIComponent(randomMessage(heatMessages))}`}
+                    href={`/room/${room}/compose?type=heat&message=${encodeURIComponent(randomMessage(heatList))}`}
                     className="signal-card signal-hot"
                 >
                     <span className="card-index">02 / intenso</span>
