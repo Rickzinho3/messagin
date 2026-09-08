@@ -4,6 +4,7 @@ import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { connectPush } from "@/components/OneSignalBootstrap";
 import { saveSession } from "@/lib/session";
+import { ArrowRight3 } from "iconsax-reactjs";
 
 export default function EntryPage() {
     const router = useRouter();
@@ -37,7 +38,6 @@ export default function EntryPage() {
     return (
         <main className="page-frame entry-page">
             <section className="entry-copy">
-                <span className="eyebrow">PRIVATE SIGNAL / 01</span>
                 <h1>
                     Uma mensagem.
                     <br />
@@ -47,9 +47,6 @@ export default function EntryPage() {
                     Crie uma sala íntima para enviar notificações que chegam na
                     hora certa.
                 </p>
-                <div className="signal-line">
-                    <span /> push privado, sem feed público
-                </div>
             </section>
             <section className="glass-panel entry-panel">
                 <div className="panel-heading">
@@ -104,7 +101,7 @@ export default function EntryPage() {
                     </div>
                     {error && <p className="form-error">{error}</p>}
                     <button className="button button-primary" type="submit">
-                        Entrar na sala <span>↗</span>
+                        Entrar na sala <ArrowRight3 color="#fff"/>
                     </button>
                 </form>
                 <p className="fine-print">
