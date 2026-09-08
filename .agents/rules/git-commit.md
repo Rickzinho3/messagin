@@ -5,5 +5,5 @@ globs: *
 
 # Git Commit Automation
 
-- Sempre faça commit das alterações realizadas no código após concluir uma tarefa ou edição.
+- Sempre faça commit e push (`git push`) das alterações realizadas no código após concluir uma tarefa ou edição.
 - Use mensagens de commit claras e no padrão Conventional Commits (ex: `feat: ...`, `fix: ...`, `refactor: ...`).
