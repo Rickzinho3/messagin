@@ -68,24 +68,14 @@ export default function RoomPage() {
                             SALA PRIVADA
                         </span>
                         <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#f4eee9]">
-                            {session.name}, escolha o tom.
+                            {session.name}, <em className="font-serif italic font-normal text-[#ffb0a7]">escolha o tom.</em>
                         </h1>
                         <p className="text-sm sm:text-base text-[#a69b9d] leading-relaxed">
-                            Envie um sinal para <strong className="text-[#f4eee9] font-semibold">{session.otherName}</strong>.
+                            Envie um sinal para <strong className="text-[#ffb0a7] font-semibold">{session.otherName}</strong>.
                             O código <b className="text-[#ffb0a7] font-mono tracking-wider">{session.room}</b> mantém vocês na mesma frequência.
                         </p>
                     </div>
-
-                    <div className="flex flex-col items-center justify-center px-5 py-3 rounded-2xl bg-white/[0.04] border border-white/[0.08] backdrop-blur-md self-start sm:self-auto">
-                        <span className="font-mono text-[10px] uppercase tracking-widest text-[#a69b9d]">ROOM</span>
-                        <strong className="font-mono text-base tracking-widest text-[#ffb0a7]">{session.room}</strong>
-                    </div>
                 </section>
-
-                <div className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-white/[0.02] border border-white/[0.06] text-xs font-mono text-[#a69b9d]">
-                    <span className="w-2 h-2 rounded-full bg-[#b8e4bf] shadow-[0_0_10px_#b8e4bf] animate-pulse" />
-                    {pushState}
-                </div>
 
                 <section className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
                     {/* Leve */}

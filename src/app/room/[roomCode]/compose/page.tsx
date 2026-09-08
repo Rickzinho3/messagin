@@ -89,7 +89,7 @@ export default function ComposePage() {
                         COMPOSITOR / {type}
                     </span>
                     <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#f4eee9]">
-                        O que você quer que apareça para a pessoa?
+                        O que você quer que apareça <em className="font-serif italic font-normal text-[#ffb0a7]">para a pessoa?</em>
                     </h1>
                     <p className="text-sm sm:text-base text-[#a69b9d] leading-relaxed">
                         Uma boa notificação chega curta, inesperada e impossível de ignorar.
