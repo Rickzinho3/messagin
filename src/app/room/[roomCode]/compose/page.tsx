@@ -107,7 +107,7 @@ export default function ComposePage() {
                         COMPOSITOR / {type}
                     </span>
                     <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#f4eee9]">
-                        O que você quer que apareça <em className="font-serif italic font-normal text-[#ffb0a7]">para a pessoa?</em>
+                        O que você quer que apareça para <em>{currentSession.gender === "ele" ? "ela" : "ele"}</em> ?
                     </h1>
                     <p className="text-sm sm:text-base text-[#a69b9d] leading-relaxed">
                         Uma boa notificação chega curta, inesperada e impossível de ignorar.
@@ -127,9 +127,9 @@ export default function ComposePage() {
                                 <button
                                     type="button"
                                     onClick={refreshMessage}
-                                    className="flex items-center gap-1.5 text-xs font-mono text-[#a69b9d] hover:text-[#ffb0a7] transition-colors cursor-pointer bg-transparent border-0"
+                                    className="flex items-center bg-gradient-to-r from-[#ee8b8d] to-[#ffb0a7] py-2 px-3 rounded-2xl gap-1.5 text-xs font-mono text-[#100d10] transition-colors cursor-pointer bg-transparent border-0"
                                 >
-                                    <Refresh size={14} color="#a69b9d" /> sortear outra
+                                    <Refresh size={14} color="#100d10" /> sortear outra
                                 </button>
                             )}
                         </div>

@@ -468,7 +468,7 @@ select {
     font-weight: 500;
 }
 textarea {
-    min-height: 220px;
+    min-height: 50px;
     resize: vertical;
     line-height: 1.7;
     margin-top: 6px;

@@ -39,9 +39,6 @@ export default function EntryPage() {
         <main className="min-h-screen w-full flex flex-col justify-center items-center px-4 sm:px-6 py-12 max-w-5xl mx-auto">
             <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
                 <section className="flex flex-col gap-4 text-left">
-                    <span className="font-mono text-xs uppercase tracking-widest text-[#a69b9d]">
-                        PRIVATE SIGNAL / 01
-                    </span>
                     <h1 className="text-5xl sm:text-7xl font-bold tracking-tight text-[#f4eee9] leading-[0.95]">
                         Uma mensagem.
                         <br />
@@ -51,20 +48,12 @@ export default function EntryPage() {
                         Crie uma sala íntima para enviar notificações que chegam na
                         hora certa.
                     </p>
-                    <div className="flex items-center gap-2.5 mt-6 text-xs font-mono uppercase tracking-widest text-[#d5beb9]">
-                        <span className="w-2 h-2 rounded-full bg-[#b8e4bf] shadow-[0_0_12px_#b8e4bf]" />
-                        push privado, sem feed público
-                    </div>
                 </section>
 
                 <section className="bg-white/[0.04] border border-white/[0.08] backdrop-blur-2xl rounded-3xl p-6 sm:p-8 shadow-2xl shadow-black/40 flex flex-col gap-6">
                     <div className="flex justify-between items-center border-b border-white/[0.08] pb-4">
                         <span className="font-mono text-xs uppercase tracking-widest text-[#a69b9d]">
                             Abrir conexão
-                        </span>
-                        <span className="flex items-center gap-2 text-xs font-mono text-[#b8e4bf]">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#b8e4bf] animate-pulse" />
-                            online
                         </span>
                     </div>
 
