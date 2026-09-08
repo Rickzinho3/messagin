@@ -50,6 +50,8 @@ async function sendOneSignalPush(input: {
                         : input.message,
             },
             url: "/",
+            chrome_web_icon: "",
+            priority: 10
         }),
     });
 
