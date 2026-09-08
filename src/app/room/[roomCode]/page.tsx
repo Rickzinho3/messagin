@@ -81,7 +81,7 @@ export default function RoomPage() {
                 </Link>
             </header>
 
-            <main className="flex-1 w-full overflow-y-auto max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex flex-col gap-8 sm:gap-10">
+            <main className="flex-1 w-full overflow-hidden max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex flex-col gap-8 sm:gap-10">
                 <section className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 pb-6 border-b border-white/[0.08]">
                     <div className="flex flex-col gap-2 max-w-xl">
                         <h1 className="text-3xl sm:text-7xl max-w-80 font-bold tracking-tight text-[#f4eee9]">

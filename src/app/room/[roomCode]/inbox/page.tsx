@@ -84,7 +84,7 @@ export default function InboxPage() {
                 <span className="font-mono text-xs uppercase tracking-widest text-[#a69b9d]">{room} / inbox</span>
             </header>
 
-            <main className="flex-1 w-full max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex flex-col gap-8">
+            <main className="flex-1 w-full overflow-hidden max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex flex-col gap-8">
                 <section className="flex justify-between items-end gap-4 pb-6 border-b border-white/[0.08]">
                     <div className="flex flex-col gap-2">
                         <span className="text-xs tracking-widest text-[#a69b9d]">

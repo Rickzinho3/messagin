@@ -102,7 +102,7 @@ export default function ComposePage() {
                 <span className="font-mono text-xs uppercase tracking-widest text-[#a69b9d]">{room}</span>
             </header>
 
-            <main className="flex-1 w-full max-w-2xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex flex-col gap-8">
+            <main className="flex-1 w-full overflow-hidden max-w-2xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex flex-col gap-8">
                 <div className="flex flex-col gap-2">
                     <span className="text-xs tracking-widest text-[#a69b9d]">
                         Compositor / {type}
