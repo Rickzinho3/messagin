@@ -11,7 +11,7 @@ import {
     randomMessage,
 } from "@/lib/messages";
 import { readSession, clearSession, Session } from "@/lib/session";
-import { ArrowRight3 } from "iconsax-reactjs";
+import { ArrowLeft3, ArrowRight3, DirectInbox, DirectRight, HeartEdit } from "iconsax-reactjs";
 
 export default function RoomPage() {
     const params = useParams<{ roomCode: string }>();
@@ -49,25 +49,22 @@ export default function RoomPage() {
     return (
         <div className="min-h-screen w-full flex flex-col bg-[#100d10] text-[#f4eee9]">
             {/* Header Fixo */}
-            <header className="sticky top-0 z-50 w-full backdrop-blur-xl bg-[#100d10]/75 border-b border-white/[0.08] px-4 sm:px-8 py-3.5 flex justify-between items-center">
-                <Link href="/" className="font-mono text-xs uppercase tracking-widest text-[#f4eee9] hover:text-[#ffb0a7] transition-colors">
-                    S / <span className="text-[#a69b9d]">private signal</span>
-                </Link>
+            <header className="sticky top-0 z-50 h-15 w-full backdrop-blur-xl bg-[#100d10]/75 border-b border-white/[0.08] px-4 sm:px-8 py-3.5 flex justify-between items-center">
                 <button
-                    className="text-xs font-mono uppercase tracking-wider text-[#a69b9d] hover:text-[#ffb0a7] transition-colors flex items-center gap-1.5 cursor-pointer bg-transparent border-0"
+                    className="text-xs font-mono tracking-wider text-[#a69b9d] hover:text-[#ffb0a7] transition-colors flex items-center gap-1.5 cursor-pointer bg-transparent border-0"
                     onClick={leave}
                 >
-                    sair da sala <ArrowRight3 color="#a69b9d" size={16} />
+                    <ArrowLeft3 color="#a69b9d" size={16} /> Sair da sala
                 </button>
+                <Link href={`/room/${room}/inbox`} className="font-mono text-xs uppercase tracking-widest text-[#f4eee9] hover:text-[#ffb0a7] transition-colors">
+                    <DirectInbox color="#a69d9d" className="size-6"/>
+                </Link>
             </header>
 
             <main className="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex flex-col gap-8 sm:gap-10">
                 <section className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 pb-6 border-b border-white/[0.08]">
                     <div className="flex flex-col gap-2 max-w-xl">
-                        <span className="font-mono text-xs uppercase tracking-widest text-[#a69b9d]">
-                            SALA PRIVADA
-                        </span>
-                        <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#f4eee9]">
+                        <h1 className="text-3xl sm:text-5xl max-w-100 font-bold tracking-tight text-[#f4eee9]">
                             {session.name}, <em className="font-serif italic font-normal text-[#ffb0a7]">escolha o tom.</em>
                         </h1>
                         <p className="text-sm sm:text-base text-[#a69b9d] leading-relaxed">
@@ -94,7 +91,7 @@ export default function RoomPage() {
                             </strong>
                         </div>
                         <span className="font-mono text-xs uppercase tracking-wider text-[#a69b9d] group-hover:text-[#ffb0a7] flex items-center gap-1 transition-colors">
-                            abrir sinal ↗
+                            abrir sinal <DirectRight color="#a69b9d" size={14}/>
                         </span>
                     </Link>
 
@@ -105,7 +102,7 @@ export default function RoomPage() {
                     >
                         <div className="flex flex-col gap-4">
                             <span className="font-mono text-xs uppercase tracking-widest text-[#ee8b8d]">
-                                02 / INTENSO 🔥
+                                02 / Quente 🔥
                             </span>
                             <strong className="text-xl sm:text-2xl font-semibold leading-snug text-[#f4eee9] group-hover:text-[#ffb0a7] transition-colors">
                                 Deixar a noite
@@ -114,7 +111,7 @@ export default function RoomPage() {
                             </strong>
                         </div>
                         <span className="font-mono text-xs uppercase tracking-wider text-[#ee8b8d] group-hover:text-[#ffb0a7] flex items-center gap-1 transition-colors">
-                            abrir sinal ↗
+                            abrir sinal <DirectRight color="#ee8b8d" size={14}/>
                         </span>
                     </Link>
 
@@ -125,7 +122,7 @@ export default function RoomPage() {
                     >
                         <div className="flex flex-col gap-4">
                             <span className="font-mono text-xs uppercase tracking-widest text-[#a69b9d]">
-                                03 / SEU TEXTO
+                                03 / personalizado
                             </span>
                             <strong className="text-xl sm:text-2xl font-semibold leading-snug text-[#f4eee9] group-hover:text-white transition-colors">
                                 Escreva exatamente
@@ -133,13 +130,12 @@ export default function RoomPage() {
                                 o que pensa.
                             </strong>
                         </div>
-                        <span className="font-mono text-xs uppercase tracking-wider text-[#a69b9d] group-hover:text-[#ffb0a7] flex items-center gap-1 transition-colors">
-                            compor mensagem ↗
+                        <span className="font-mono text-xs uppercase tracking-wider text-[#a69b9d] group-hover:text-[#ffb0a7] flex items-center gap-2 transition-colors">
+                            compor mensagem <HeartEdit color="#a69b9d" size={14} />
                         </span>
                     </Link>
                 </section>
-
-                <nav className="flex justify-between items-center pt-8 border-t border-white/[0.08] font-mono text-xs uppercase tracking-widest text-[#a69b9d]">
+                {/* <nav className="flex justify-between items-center pt-8 border-t border-white/[0.08] font-mono text-xs uppercase tracking-widest text-[#a69b9d]">
                     <Link
                         href={`/room/${room}/inbox`}
                         className="hover:text-[#ffb0a7] transition-colors flex items-center gap-1 text-[#f4eee9]"
@@ -147,7 +143,7 @@ export default function RoomPage() {
                         caixa de entrada <span className="text-[#ffb0a7]">↗</span>
                     </Link>
                     <span className="text-white/40">notificações push ativas</span>
-                </nav>
+                </nav> */}
             </main>
         </div>
     );

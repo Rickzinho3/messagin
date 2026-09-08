@@ -73,7 +73,7 @@ export default function ComposePage() {
     return (
         <div className="min-h-screen w-full flex flex-col bg-[#100d10] text-[#f4eee9]">
             {/* Header Fixo */}
-            <header className="sticky top-0 z-50 w-full backdrop-blur-xl bg-[#100d10]/75 border-b border-white/[0.08] px-4 sm:px-8 py-3.5 flex justify-between items-center">
+            <header className="sticky top-0 z-50 w-full h-15 backdrop-blur-xl bg-[#100d10]/75 border-b border-white/[0.08] px-4 sm:px-8 py-3.5 flex justify-between items-center">
                 <Link
                     href={`/room/${room}`}
                     className="text-xs font-mono uppercase tracking-wider text-[#a69b9d] hover:text-[#ffb0a7] transition-colors flex items-center gap-2"
@@ -109,7 +109,7 @@ export default function ComposePage() {
                             onChange={(event) => setMessage(event.target.value)}
                             placeholder="Digite seu sinal..."
                             maxLength={240}
-                            autoFocus
+                            disabled={type != "custom"}
                             rows={4}
                             className="w-full bg-white/[0.05] border border-white/[0.12] rounded-2xl p-4 text-[#f4eee9] placeholder:text-white/30 focus:outline-none focus:border-[#ee8b8d] focus:ring-1 focus:ring-[#ee8b8d] transition-all resize-none text-base leading-relaxed"
                         />

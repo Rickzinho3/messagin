@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { readSession, Session } from "@/lib/session";
+import { ArrowLeft3, Refresh } from "iconsax-reactjs";
 
 type Message = {
     id: string;
@@ -20,6 +21,7 @@ export default function InboxPage() {
     const [session, setSession] = useState<Session | null>(null);
     const [messages, setMessages] = useState<Message[]>([]);
     const [loading, setLoading] = useState(true);
+    const [updating, setUpdating] = useState(false)
 
     const loadMessages = useCallback(async (current: Session) => {
         const response = await fetch(
@@ -30,6 +32,7 @@ export default function InboxPage() {
         const data = await response.json();
         setMessages(data.messages || []);
         setLoading(false);
+        setUpdating(false)
     }, []);
 
     useEffect(() => {
@@ -40,6 +43,7 @@ export default function InboxPage() {
         }
         setSession(current);
         loadMessages(current).catch(() => setLoading(false));
+        setUpdating(false)
         const interval = window.setInterval(
             () => loadMessages(current).catch(() => undefined),
             8000,
@@ -69,12 +73,12 @@ export default function InboxPage() {
     return (
         <div className="min-h-screen w-full flex flex-col bg-[#100d10] text-[#f4eee9]">
             {/* Header Fixo */}
-            <header className="sticky top-0 z-50 w-full backdrop-blur-xl bg-[#100d10]/75 border-b border-white/[0.08] px-4 sm:px-8 py-3.5 flex justify-between items-center">
+            <header className="sticky top-0 z-50 h-15 w-full backdrop-blur-xl bg-[#100d10]/75 border-b border-white/[0.08] px-4 sm:px-8 py-3.5 flex justify-between items-center">
                 <Link
                     href={`/room/${room}`}
                     className="text-xs font-mono uppercase tracking-wider text-[#a69b9d] hover:text-[#ffb0a7] transition-colors flex items-center gap-1.5"
                 >
-                    ← voltar para sala
+                    <ArrowLeft3 color="#f4eee9" size={20} /> voltar para sala
                 </Link>
                 <span className="font-mono text-xs uppercase tracking-widest text-[#a69b9d]">{room} / inbox</span>
             </header>
@@ -92,10 +96,10 @@ export default function InboxPage() {
                         </h1>
                     </div>
                     <button
-                        className="px-4 py-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] font-mono text-xs uppercase tracking-wider text-[#a69b9d] hover:text-[#f4eee9] transition-all cursor-pointer"
-                        onClick={() => loadMessages(session)}
+                        className="px-4 py-2 rounded-xl flex items-center gap-2 bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] font-mono text-xs tracking-wider text-[#a69b9d] hover:text-[#f4eee9] transition-all cursor-pointer"
+                        onClick={() => { loadMessages(session), setUpdating(true) }}
                     >
-                        atualizar ↻
+                        Atualizar <Refresh color="#a69b9d" size={15} className={`${updating ? "animate-spin" : ""}`} />
                     </button>
                 </section>
 
