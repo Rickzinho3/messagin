@@ -5,6 +5,8 @@ export const lightMessages = [
   "Queria estar do seu lado nesse momento",
   "Você me deixa com vontade de coisas boas...",
   "Saudade de ouvir sua voz",
+  "Pensar em você me deixa bobo",
+  "Queria te dar um beijo com intenção",
   "Me manda um oi quando puder, tô aqui te esperando",
   "Você é meu pensamento favorito do dia",
   "Não consigo parar de pensar na gente",

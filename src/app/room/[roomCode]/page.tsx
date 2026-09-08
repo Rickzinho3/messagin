@@ -122,7 +122,7 @@ export default function RoomPage() {
                                 Quente <Lovely variant="Bulk" color="#ee8b8d" size={14}/>
                             </span>
                             <strong className="text-xl sm:text-2xl font-semibold leading-snug text-[#f4eee9] group-hover:text-[#ffb0a7] transition-colors">
-                                Deixar a noite
+                                Deixar o clima
                                 <br />
                                 mais interessante.
                             </strong>
