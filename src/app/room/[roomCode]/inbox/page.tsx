@@ -72,7 +72,7 @@ export default function InboxPage() {
         );
 
     return (
-        <div className="min-h-screen w-full flex flex-col bg-[#100d10] text-[#f4eee9]">
+        <div className="min-h-screen w-full flex flex-col bg-[#100d10] text-[#f4eee9] overflow-hidden">
             {/* Header Fixo */}
             <header className="sticky top-0 z-50 h-15 w-full backdrop-blur-xl bg-[#100d10]/75 border-b border-white/[0.08] px-4 sm:px-8 py-3.5 flex justify-between items-center">
                 <Link
@@ -114,7 +114,7 @@ export default function InboxPage() {
                         <span className="text-sm text-[#a69b9d]">Quando chegar, ela aparece aqui.</span>
                     </div>
                 ) : (
-                    <section className="flex flex-col overflow-y-auto gap-4">
+                    <section className="flex-1 flex flex-col overflow-y-auto gap-4">
                         {messages.map((message) => (
                             <article
                                 className="p-6 rounded-3xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl flex flex-col gap-4 shadow-lg shadow-black/20"
