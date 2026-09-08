@@ -64,7 +64,7 @@ export default function RoomPage() {
         session.gender === "ele" ? heatMessagesForHer : heatMessageForHim;
 
     return (
-        <div className="min-h-screen w-full flex flex-col bg-[#100d10] text-[#f4eee9]">
+        <div className="min-h-screen w-full flex flex-col items-center justify-center bg-[#100d10] text-[#f4eee9]">
             {/* Header Fixo */}
             <header className="sticky top-0 z-50 h-15 w-full backdrop-blur-md bg-[#100d10]/75 border-b border-white/[0.08] px-4 sm:px-8 py-3.5 flex justify-between items-center">
                 <button
@@ -98,7 +98,7 @@ export default function RoomPage() {
                     {/* Leve */}
                     <Link
                         href={`/room/${room}/compose?type=light&message=${encodeURIComponent(randomMessage(lightMessages))}`}
-                        className="group p-6 sm:p-7 rounded-3xl bg-gradient-to-b from-emerald-200/20 to-transparent border border-emerald-200/20 hover:border-white/20 hover:bg-white/[0.06] backdrop-blur-xl transition-all duration-300 flex flex-col justify-between gap-8 hover:-translate-y-1 shadow-lg shadow-black/20"
+                        className="group p-6 sm:p-7 rounded-3xl bg-gradient-to-b from-emerald-200/20 to-transparent border border-emerald-200/20 hover:border-white/20 hover:shadow-xl hover:shadow-emerald-200/15 backdrop-blur-xl transition-all duration-300 flex flex-col justify-between gap-8 hover:-translate-y-1 shadow-lg shadow-black/20"
                     >
                         <div className="flex flex-col gap-4">
                             <span className="flex items-center gap-1 text-xs tracking-widest text-[#a69b9d]">
