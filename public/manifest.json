@@ -1,7 +1,7 @@
 {
-  "name": "Heat ",
-  "short_name": "Safadas",
-  "description": "Lembrei de você e te mandei uma mensagem quente",
+  "name": "Heat Messages",
+  "short_name": "Heat",
+  "description": "Send hot messages to your lover",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#100d10",
