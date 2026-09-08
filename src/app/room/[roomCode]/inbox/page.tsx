@@ -119,8 +119,8 @@ export default function InboxPage() {
                                 className="p-6 rounded-3xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl flex flex-col gap-4 shadow-lg shadow-black/20"
                                 key={message.id}
                             >
-                                <div className="flex justify-between items-center font-mono text-xs text-[#a69b9d] uppercase tracking-wider border-b border-white/[0.06] pb-3">
-                                    <span className="text-[#ffb0a7]">de {message.from}</span>
+                                <div className="flex justify-between items-center text-xs text-[#a69b9d] tracking-wider border-b border-white/[0.06] pb-3">
+                                    <span className="text-[#ffb0a7]">De {message.from}</span>
                                     <time>
                                         {new Date(
                                             message.createdAt,
@@ -135,10 +135,10 @@ export default function InboxPage() {
                                 </p>
                                 <div className="flex justify-end pt-2">
                                     <button
-                                        className="text-xs flex bg-gradient-to-r from-[#ee8b8d] px-2 py-3 rounded-xl to-[#ffb0a7] text-[#100d10] items-center gap-2 tracking-wider transition-colors cursor-pointer border-0"
+                                        className="text-xs flex bg-gradient-to-r from-[#ee8b8d] px-1 py-2 rounded-xl to-[#ffb0a7] text-[#100d10] items-center gap-2 tracking-wider transition-colors cursor-pointer border-0"
                                         onClick={() => markRead(message.id)}
                                     >
-                                        Marcar como lida <Check color="#a69b9d" size={16} />
+                                        Marcar como lida <Check color="#100d10" size={16} />
                                     </button>
                                 </div>
                             </article>
