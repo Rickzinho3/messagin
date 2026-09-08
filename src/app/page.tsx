@@ -36,7 +36,7 @@ export default function EntryPage() {
     }
 
     return (
-        <main className="min-h-screen overflow-hidden w-full flex justify-center items-center px-4 sm:px-6 py-12 max-w-5xl lg:max-w-full lg:px-20 mx-auto">
+        <main className="min-h-screen max-h-screen overflow-y-hidden w-full flex justify-center items-center px-4 sm:px-6 py-12 max-w-5xl lg:max-w-full lg:px-20 mx-auto">
             <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
                 <section className="flex flex-col gap-4 text-left">
                     <h1 className="text-5xl sm:text-7xl font-bold tracking-tight text-[#f4eee9] leading-[0.95]">
