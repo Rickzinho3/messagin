@@ -53,6 +53,7 @@ async function sendOneSignalPush(input: {
             },
             url: roomUrl,
             priority: 10,
+            chrome_web_icon: "https://ibb.co/kgp25cdg",
             web_buttons: [
                 {
                     id: "abrir-sala",
