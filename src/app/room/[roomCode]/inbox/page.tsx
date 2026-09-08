@@ -101,7 +101,7 @@ export default function InboxPage() {
                         className="px-4 py-2 rounded-xl flex items-center gap-2 bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] font-mono text-xs tracking-wider text-[#a69b9d] hover:text-[#f4eee9] transition-all cursor-pointer"
                         onClick={() => { loadMessages(session), setUpdating(true) }}
                     >
-                        Atualizar <Refresh color="#a69b9d" size={15} className={`${updating ? "animate-spin" : ""}`} />
+                        Atualizar <Refresh color="#a69b9d" size={15} className={`transition-all ${updating ? "animate-spin" : ""}`} />
                     </button>
                 </section>
 

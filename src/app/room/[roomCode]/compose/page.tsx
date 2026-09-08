@@ -23,6 +23,7 @@ export default function ComposePage() {
     const [type, setType] = useState("custom");
     const [sending, setSending] = useState(false);
     const [error, setError] = useState("");
+    const [reload, setReload] = useState(false);
 
     useEffect(() => {
         const current = readSession();
@@ -127,10 +128,10 @@ export default function ComposePage() {
                             {type !== "custom" && (
                                 <button
                                     type="button"
-                                    onClick={refreshMessage}
+                                    onClick={() => { refreshMessage(); setReload(true); setTimeout(() => setReload(false), 500); }}
                                     className="flex items-center bg-gradient-to-r from-[#ee8b8d] to-[#ffb0a7] p-2 rounded-full gap-1.5 text-xs font-mono text-[#100d10] transition-colors cursor-pointer bg-transparent border-0"
                                 >
-                                    <Refresh size={17} color="#100d10" />
+                                    <Refresh size={17} color="#100d10" className={`transition_all ${reload ? "animate-spin" : ""}`} />
                                 </button>
                             )}
                         </div>
@@ -140,8 +141,8 @@ export default function ComposePage() {
                             placeholder="Digite seu sinal..."
                             maxLength={240}
                             disabled={type !== "custom"}
-                            rows={4}
-                            className="w-full bg-white/[0.05] border border-white/[0.12] rounded-2xl p-4 text-[#f4eee9] placeholder:text-white/30 focus:outline-none focus:border-[#ee8b8d] focus:ring-1 focus:ring-[#ee8b8d] transition-all resize-none"
+                            rows={1}
+                            className="w-full max-h-40 h-auto resize-none transition-all bg-white/[0.05] border border-white/[0.12] rounded-2xl p-4 text-[#f4eee9] placeholder:text-white/30 focus:outline-none focus:border-[#ee8b8d] focus:ring-1 focus:ring-[#ee8b8d] transition-all"
                         />
                         <span className="text-[#a69b9d]">
                             {message.length}/240
