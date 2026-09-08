@@ -14,7 +14,7 @@ export const lightMessages = [
 ];
 
 export const heatMessagesForHer = [
-  "Quero foder essa sua buceta até ela ficar inchada e escorrendo porra",
+  "Quero foder essa sua buceta até ela ficar inchada e escorrendo",
   "Vou te engolir inteira, chupar esse clitóris até você squirtar na minha cara",
   "Me ajoelha e enfia essa rola até o fundo da sua garganta, quero te ver babando",
   "Hoje eu vou arrombar esse seu cuzinho apertado enquanto esfrego sua xota",
@@ -23,7 +23,7 @@ export const heatMessagesForHer = [
   "Vou te amarrar e te usar como brinquedo a noite inteira, sem pausa",
   "Me manda um vídeo se tocando e falando que essa buceta é só minha",
   "Quero sentir seu gozo escorrendo pelas minhas bolas enquanto te fodo fundo",
-  "Vou te encher de porra em todos os buracos até você não aguentar mais",
+  "Vou te encher de leite em todos os buracos até você não aguentar mais",
   "Sua xota latejando de tesão já tá me deixando duro pra caralho",
   "Quero te foder no espelho pra você ver essa cara de puta gozando",
   "Vou te chupar tão forte que você vai gozar só com a língua",
@@ -42,7 +42,7 @@ export const heatMessageForHim = [
   "Vou te masturbar bem gostoso e chupar até a última gota",
   "Senta na minha cara e me faz engolir sua pica até o fundo",
   "Quero que você me use como sua putinha particular a noite toda",
-  "Me enche de porra, quero escorrer pelos meus seios e pela boca",
+  "Goza em mim, quero tudo escorrendo pela minha boca",
   "Vou te cavalgar tão forte que você vai gozar mais de uma vez",
   "Chupa meus peitos enquanto eu esfrego essa buceta molhada na sua pica",
   "Quero você me fodendo de pé, me segurando pelo pescoço",
