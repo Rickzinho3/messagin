@@ -3,17 +3,17 @@ import "./globals.css";
 import { OneSignalBootstrap } from "@/components/OneSignalBootstrap";
 
 export const metadata: Metadata = {
-    title: "Notificações Safadas 🔥",
-    description: "Lembrei de você e te mandei uma mensagem quente",
+    title: "Pulse",
+    description: "Send hot messages to your lover",
     manifest: "/manifest.json",
     icons: {
-        icon: "/icon-192.png",
-        apple: "/apple-touch-icon.png",
+        icon: "/app-icon.jpg",
+        apple: "/apple-icon.jpg",
     },
     appleWebApp: {
         capable: true,
         statusBarStyle: "black-translucent",
-        title: "Safadas",
+        title: "Pulse",
     },
 };
 
@@ -34,7 +34,7 @@ export default function RootLayout({
         <html lang="pt-BR">
             <head>
                 <link rel="manifest" href="/manifest.json" />
-                <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+                <link rel="apple-touch-icon" href="/apple-icon.jpg" />
                 <meta name="mobile-web-app-capable" content="yes" />
                 <meta name="apple-mobile-web-app-capable" content="yes" />
                 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
