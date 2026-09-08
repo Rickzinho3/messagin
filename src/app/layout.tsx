@@ -6,6 +6,10 @@ export const metadata: Metadata = {
     title: "Notificações Safadas 🔥",
     description: "Lembrei de você e te mandei uma mensagem quente",
     manifest: "/manifest.json",
+    icons: {
+        icon: "/icon-192.png",
+        apple: "/apple-touch-icon.png",
+    },
     appleWebApp: {
         capable: true,
         statusBarStyle: "black-translucent",
@@ -14,7 +18,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-    themeColor: "#ff4d6d",
+    themeColor: "#100d10",
     width: "device-width",
     initialScale: 1,
     maximumScale: 1,
@@ -30,8 +34,11 @@ export default function RootLayout({
         <html lang="pt-BR">
             <head>
                 <link rel="manifest" href="/manifest.json" />
+                <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
                 <meta name="mobile-web-app-capable" content="yes" />
                 <meta name="apple-mobile-web-app-capable" content="yes" />
+                <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+                <meta name="theme-color" content="#100d10" />
             </head>
             <body>
                 <OneSignalBootstrap />

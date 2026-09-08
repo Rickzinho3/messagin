@@ -1,11 +1,11 @@
 {
-  "name": "Notificações Safadas",
+  "name": "Heat ",
   "short_name": "Safadas",
   "description": "Lembrei de você e te mandei uma mensagem quente",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#1a0a0a",
-  "theme_color": "#ff4d6d",
+  "background_color": "#100d10",
+  "theme_color": "#100d10",
   "orientation": "portrait",
   "icons": [
     {
@@ -19,6 +19,12 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
     }
   ]
 }
