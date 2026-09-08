@@ -9,21 +9,21 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "/icon-192.png",
+      "src": "/app-icon.jpg",
       "sizes": "192x192",
-      "type": "image/png",
+      "type": "image/jpg",
       "purpose": "any maskable"
     },
     {
-      "src": "/icon-512.png",
+      "src": "/app-icon.jpg",
       "sizes": "512x512",
-      "type": "image/png",
+      "type": "image/jpg",
       "purpose": "any maskable"
     },
     {
-      "src": "/apple-touch-icon.png",
+      "src": "/apple-icon.jpg",
       "sizes": "180x180",
-      "type": "image/png",
+      "type": "image/jpg",
       "purpose": "any"
     }
   ]
