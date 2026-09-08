@@ -36,79 +36,111 @@ export default function EntryPage() {
     }
 
     return (
-        <main className="page-frame entry-page">
-            <section className="entry-copy">
-                <h1>
-                    Uma mensagem.
-                    <br />
-                    <em>Um arrepio.</em>
-                </h1>
-                <p>
-                    Crie uma sala íntima para enviar notificações que chegam na
-                    hora certa.
-                </p>
-            </section>
-            <section className="glass-panel entry-panel">
-                <div className="panel-heading">
-                    <span className="panel-kicker">Abrir conexão</span>
-                    <span className="status-dot">online</span>
-                </div>
-                <form onSubmit={enter} className="form-stack">
-                    <label>
-                        Seu nome
-                        <input
-                            value={name}
-                            onChange={(event) => setName(event.target.value)}
-                            placeholder="Como quer ser chamado?"
-                            autoComplete="name"
-                        />
-                    </label>
-                    <label>
-                        Nome da pessoa
-                        <input
-                            value={otherName}
-                            onChange={(event) =>
-                                setOtherName(event.target.value)
-                            }
-                            placeholder="Quem vai receber?"
-                        />
-                    </label>
-                    <div className="form-row">
-                        <label className="grow">
-                            Código da sala
+        <main className="min-h-screen w-full flex flex-col justify-center items-center px-4 sm:px-6 py-12 max-w-5xl mx-auto">
+            <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+                <section className="flex flex-col gap-4 text-left">
+                    <span className="font-mono text-xs uppercase tracking-widest text-[#a69b9d]">
+                        PRIVATE SIGNAL / 01
+                    </span>
+                    <h1 className="text-5xl sm:text-7xl font-bold tracking-tight text-[#f4eee9] leading-[0.95]">
+                        Uma mensagem.
+                        <br />
+                        <em className="font-serif italic font-normal text-[#ffb0a7]">Um arrepio.</em>
+                    </h1>
+                    <p className="text-[#a69b9d] text-base leading-relaxed max-w-md">
+                        Crie uma sala íntima para enviar notificações que chegam na
+                        hora certa.
+                    </p>
+                    <div className="flex items-center gap-2.5 mt-6 text-xs font-mono uppercase tracking-widest text-[#d5beb9]">
+                        <span className="w-2 h-2 rounded-full bg-[#b8e4bf] shadow-[0_0_12px_#b8e4bf]" />
+                        push privado, sem feed público
+                    </div>
+                </section>
+
+                <section className="bg-white/[0.04] border border-white/[0.08] backdrop-blur-2xl rounded-3xl p-6 sm:p-8 shadow-2xl shadow-black/40 flex flex-col gap-6">
+                    <div className="flex justify-between items-center border-b border-white/[0.08] pb-4">
+                        <span className="font-mono text-xs uppercase tracking-widest text-[#a69b9d]">
+                            Abrir conexão
+                        </span>
+                        <span className="flex items-center gap-2 text-xs font-mono text-[#b8e4bf]">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#b8e4bf] animate-pulse" />
+                            online
+                        </span>
+                    </div>
+
+                    <form onSubmit={enter} className="flex flex-col gap-5">
+                        <label className="flex flex-col gap-2 text-sm text-[#f4eee9]">
+                            <span className="font-medium">Seu nome</span>
                             <input
-                                value={room}
-                                onChange={(event) =>
-                                    setRoom(event.target.value.toUpperCase())
-                                }
-                                placeholder="ex: AFTERDARK"
+                                value={name}
+                                onChange={(event) => setName(event.target.value)}
+                                placeholder="Como quer ser chamado?"
+                                autoComplete="name"
+                                className="w-full bg-white/[0.05] border border-white/[0.12] rounded-xl px-4 py-3 text-[#f4eee9] placeholder:text-white/30 focus:outline-none focus:border-[#ee8b8d] focus:ring-1 focus:ring-[#ee8b8d] transition-all"
                             />
                         </label>
-                        <label className="select-label">
-                            Você é
-                            <select
-                                value={gender}
+
+                        <label className="flex flex-col gap-2 text-sm text-[#f4eee9]">
+                            <span className="font-medium">Nome da pessoa</span>
+                            <input
+                                value={otherName}
                                 onChange={(event) =>
-                                    setGender(
-                                        event.target.value as "ele" | "ela",
-                                    )
+                                    setOtherName(event.target.value)
                                 }
-                            >
-                                <option value="ele">ele</option>
-                                <option value="ela">ela</option>
-                            </select>
+                                placeholder="Quem vai receber?"
+                                className="w-full bg-white/[0.05] border border-white/[0.12] rounded-xl px-4 py-3 text-[#f4eee9] placeholder:text-white/30 focus:outline-none focus:border-[#ee8b8d] focus:ring-1 focus:ring-[#ee8b8d] transition-all"
+                            />
                         </label>
-                    </div>
-                    {error && <p className="form-error">{error}</p>}
-                    <button className="button button-primary" type="submit">
-                        Entrar na sala <ArrowRight3 color="#fff"/>
-                    </button>
-                </form>
-                <p className="fine-print">
-                    Ao entrar, o Android pedirá permissão para receber seus
-                    sinais.
-                </p>
-            </section>
+
+                        <div className="grid grid-cols-3 gap-3">
+                            <label className="col-span-2 flex flex-col gap-2 text-sm text-[#f4eee9]">
+                                <span className="font-medium">Código da sala</span>
+                                <input
+                                    value={room}
+                                    onChange={(event) =>
+                                        setRoom(event.target.value.toUpperCase())
+                                    }
+                                    placeholder="ex: AFTERDARK"
+                                    className="w-full bg-white/[0.05] border border-white/[0.12] rounded-xl px-4 py-3 text-[#f4eee9] placeholder:text-white/30 focus:outline-none focus:border-[#ee8b8d] focus:ring-1 focus:ring-[#ee8b8d] transition-all uppercase tracking-wider"
+                                />
+                            </label>
+
+                            <label className="col-span-1 flex flex-col gap-2 text-sm text-[#f4eee9]">
+                                <span className="font-medium">Você é</span>
+                                <select
+                                    value={gender}
+                                    onChange={(event) =>
+                                        setGender(
+                                            event.target.value as "ele" | "ela",
+                                        )
+                                    }
+                                    className="w-full bg-[#181419] border border-white/[0.12] rounded-xl px-3 py-3 text-[#f4eee9] focus:outline-none focus:border-[#ee8b8d] transition-all"
+                                >
+                                    <option value="ele">ele</option>
+                                    <option value="ela">ela</option>
+                                </select>
+                            </label>
+                        </div>
+
+                        {error && (
+                            <p className="text-red-400 text-xs font-medium bg-red-500/10 border border-red-500/20 rounded-lg p-3">
+                                {error}
+                            </p>
+                        )}
+
+                        <button
+                            className="w-full bg-gradient-to-r from-[#ee8b8d] to-[#ffb0a7] text-[#100d10] font-semibold py-3.5 px-6 rounded-xl hover:opacity-95 active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#ee8b8d]/20 cursor-pointer mt-2"
+                            type="submit"
+                        >
+                            Entrar na sala <ArrowRight3 size={18} color="#100d10" />
+                        </button>
+                    </form>
+
+                    <p className="text-xs text-[#a69b9d] text-center font-mono">
+                        Ao entrar, o Android pedirá permissão para receber seus sinais.
+                    </p>
+                </section>
+            </div>
         </main>
     );
 }

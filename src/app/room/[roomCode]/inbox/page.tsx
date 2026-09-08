@@ -61,67 +61,87 @@ export default function InboxPage() {
 
     if (!session)
         return (
-            <main className="page-frame loading-state">Abrindo inbox...</main>
+            <main className="min-h-screen w-full flex items-center justify-center font-mono text-sm text-[#a69b9d]">
+                Abrindo inbox...
+            </main>
         );
 
     return (
-        <main className="page-frame inner-page">
-            <header className="topbar">
-                <Link href={`/room/${room}`} className="back-link">
+        <div className="min-h-screen w-full flex flex-col bg-[#100d10] text-[#f4eee9]">
+            {/* Header Fixo */}
+            <header className="sticky top-0 z-50 w-full backdrop-blur-xl bg-[#100d10]/75 border-b border-white/[0.08] px-4 sm:px-8 py-3.5 flex justify-between items-center">
+                <Link
+                    href={`/room/${room}`}
+                    className="text-xs font-mono uppercase tracking-wider text-[#a69b9d] hover:text-[#ffb0a7] transition-colors flex items-center gap-1.5"
+                >
                     ← voltar para sala
                 </Link>
-                <span className="room-label">{room} / inbox</span>
+                <span className="font-mono text-xs uppercase tracking-widest text-[#a69b9d]">{room} / inbox</span>
             </header>
-            <section className="inbox-heading">
-                <div>
-                    <span className="eyebrow">CAIXA DE ENTRADA</span>
-                    <h1>
-                        O que chegou
-                        <br />
-                        <em>para você.</em>
-                    </h1>
-                </div>
-                <button
-                    className="button button-quiet"
-                    onClick={() => loadMessages(session)}
-                >
-                    atualizar ↻
-                </button>
-            </section>
-            {loading ? (
-                <p className="empty-state">Buscando sinais...</p>
-            ) : messages.length === 0 ? (
-                <p className="empty-state">
-                    Nenhuma mensagem nova.
-                    <br />
-                    <span>Quando chegar, ela aparece aqui.</span>
-                </p>
-            ) : (
-                <section className="message-list">
-                    {messages.map((message) => (
-                        <article className="received-message" key={message.id}>
-                            <div className="message-meta">
-                                <span>de {message.from}</span>
-                                <time>
-                                    {new Date(
-                                        message.createdAt,
-                                    ).toLocaleTimeString("pt-BR", {
-                                        hour: "2-digit",
-                                        minute: "2-digit",
-                                    })}
-                                </time>
-                            </div>
-                            <p>{message.message}</p>
-                            <button
-                                className="text-button"
-                                onClick={() => markRead(message.id)}
-                            >
-                                marcar como lida
-                            </button>
-                        </article>
-                    ))}
+
+            <main className="flex-1 w-full max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex flex-col gap-8">
+                <section className="flex justify-between items-end gap-4 pb-6 border-b border-white/[0.08]">
+                    <div className="flex flex-col gap-2">
+                        <span className="font-mono text-xs uppercase tracking-widest text-[#a69b9d]">
+                            CAIXA DE ENTRADA
+                        </span>
+                        <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#f4eee9]">
+                            O que chegou
+                            <br />
+                            <em className="font-serif italic font-normal text-[#ffb0a7]">para você.</em>
+                        </h1>
+                    </div>
+                    <button
+                        className="px-4 py-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] font-mono text-xs uppercase tracking-wider text-[#a69b9d] hover:text-[#f4eee9] transition-all cursor-pointer"
+                        onClick={() => loadMessages(session)}
+                    >
+                        atualizar ↻
+                    </button>
                 </section>
-            )}
-        </main>
+
+                {loading ? (
+                    <div className="py-20 text-center font-mono text-sm text-[#a69b9d]">
+                        Buscando sinais...
+                    </div>
+                ) : messages.length === 0 ? (
+                    <div className="py-20 text-center flex flex-col gap-2">
+                        <p className="text-lg font-medium text-[#f4eee9]">Nenhuma mensagem nova.</p>
+                        <span className="text-sm text-[#a69b9d]">Quando chegar, ela aparece aqui.</span>
+                    </div>
+                ) : (
+                    <section className="flex flex-col gap-4">
+                        {messages.map((message) => (
+                            <article
+                                className="p-6 rounded-3xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl flex flex-col gap-4 shadow-lg shadow-black/20"
+                                key={message.id}
+                            >
+                                <div className="flex justify-between items-center font-mono text-xs text-[#a69b9d] uppercase tracking-wider border-b border-white/[0.06] pb-3">
+                                    <span className="text-[#ffb0a7]">de {message.from}</span>
+                                    <time>
+                                        {new Date(
+                                            message.createdAt,
+                                        ).toLocaleTimeString("pt-BR", {
+                                            hour: "2-digit",
+                                            minute: "2-digit",
+                                        })}
+                                    </time>
+                                </div>
+                                <p className="text-lg text-[#f4eee9] leading-relaxed">
+                                    {message.message}
+                                </p>
+                                <div className="flex justify-end pt-2">
+                                    <button
+                                        className="font-mono text-xs uppercase tracking-wider text-[#a69b9d] hover:text-[#ee8b8d] transition-colors cursor-pointer bg-transparent border-0"
+                                        onClick={() => markRead(message.id)}
+                                    >
+                                        marcar como lida ✓
+                                    </button>
+                                </div>
+                            </article>
+                        ))}
+                    </section>
+                )}
+            </main>
+        </div>
     );
 }

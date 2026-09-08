@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 import { readSession, Session } from "@/lib/session";
+import { ArrowLeft3 } from "iconsax-reactjs";
 
 export default function ComposePage() {
     const params = useParams<{ roomCode: string }>();
@@ -29,7 +30,7 @@ export default function ComposePage() {
 
     if (!session)
         return (
-            <main className="page-frame loading-state">
+            <main className="min-h-screen w-full flex items-center justify-center font-mono text-sm text-[#a69b9d]">
                 Abrindo compositor...
             </main>
         );
@@ -70,45 +71,70 @@ export default function ComposePage() {
     }
 
     return (
-        <main className="page-frame inner-page">
-            <header className="topbar">
-                <Link href={`/room/${room}`} className="back-link">
-                    ← voltar para sala
+        <div className="min-h-screen w-full flex flex-col bg-[#100d10] text-[#f4eee9]">
+            {/* Header Fixo */}
+            <header className="sticky top-0 z-50 w-full backdrop-blur-xl bg-[#100d10]/75 border-b border-white/[0.08] px-4 sm:px-8 py-3.5 flex justify-between items-center">
+                <Link
+                    href={`/room/${room}`}
+                    className="text-xs font-mono uppercase tracking-wider text-[#a69b9d] hover:text-[#ffb0a7] transition-colors flex items-center gap-2"
+                >
+                    <ArrowLeft3 color="#fff" size={16} /> voltar para sala
                 </Link>
-                <span className="room-label">{room}</span>
+                <span className="font-mono text-xs uppercase tracking-widest text-[#a69b9d]">{room}</span>
             </header>
-            <section className="compose-layout">
-                <div className="section-intro">
-                    <span className="eyebrow">COMPOSITOR / {type}</span>
-                    <h1>O que você quer que apareça para a pessoa?</h1>
-                    <p>
-                        Uma boa notificação chega curta, inesperada e impossível
-                        de ignorar.
+
+            <main className="flex-1 w-full max-w-2xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex flex-col gap-8">
+                <div className="flex flex-col gap-2">
+                    <span className="font-mono text-xs uppercase tracking-widest text-[#a69b9d]">
+                        COMPOSITOR / {type}
+                    </span>
+                    <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#f4eee9]">
+                        O que você quer que apareça para a pessoa?
+                    </h1>
+                    <p className="text-sm sm:text-base text-[#a69b9d] leading-relaxed">
+                        Uma boa notificação chega curta, inesperada e impossível de ignorar.
                     </p>
                 </div>
-                <form onSubmit={send} className="glass-panel compose-panel">
-                    <label className="message-label">
-                        Mensagem para <b>{session.otherName}</b>
+
+                <form
+                    onSubmit={send}
+                    className="bg-white/[0.04] border border-white/[0.08] backdrop-blur-2xl rounded-3xl p-6 sm:p-8 shadow-2xl shadow-black/40 flex flex-col gap-6"
+                >
+                    <label className="flex flex-col gap-3 text-sm text-[#f4eee9]">
+                        <span className="font-medium text-[#a69b9d]">
+                            Mensagem para <b className="text-[#f4eee9]">{session.otherName}</b>
+                        </span>
                         <textarea
                             value={message}
                             onChange={(event) => setMessage(event.target.value)}
                             placeholder="Digite seu sinal..."
                             maxLength={240}
                             autoFocus
+                            rows={4}
+                            className="w-full bg-white/[0.05] border border-white/[0.12] rounded-2xl p-4 text-[#f4eee9] placeholder:text-white/30 focus:outline-none focus:border-[#ee8b8d] focus:ring-1 focus:ring-[#ee8b8d] transition-all resize-none text-base leading-relaxed"
                         />
                     </label>
-                    <div className="composer-footer">
-                        <span>{message.length}/240</span>
+
+                    <div className="flex justify-between items-center pt-2">
+                        <span className="font-mono text-xs text-[#a69b9d]">
+                            {message.length}/240
+                        </span>
                         <button
-                            className="button button-primary"
+                            className="bg-gradient-to-r from-[#ee8b8d] to-[#ffb0a7] text-[#100d10] font-semibold py-3 px-6 rounded-xl hover:opacity-95 active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#ee8b8d]/20 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                             disabled={sending}
+                            type="submit"
                         >
                             {sending ? "enviando..." : "enviar sinal ↗"}
                         </button>
                     </div>
-                    {error && <p className="form-error">{error}</p>}
+
+                    {error && (
+                        <p className="text-red-400 text-xs font-medium bg-red-500/10 border border-red-500/20 rounded-lg p-3">
+                            {error}
+                        </p>
+                    )}
                 </form>
-            </section>
-        </main>
+            </main>
+        </div>
     );
 }
