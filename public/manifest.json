@@ -1,6 +1,6 @@
 {
-  "name": "Heat Messages",
-  "short_name": "Heat",
+  "name": "Pulse",
+  "short_name": "Pulse",
   "description": "Send hot messages to your lover",
   "start_url": "/",
   "display": "standalone",
