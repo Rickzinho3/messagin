@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { readSession, Session } from "@/lib/session";
-import { ArrowLeft3, Refresh } from "iconsax-reactjs";
+import { ArrowLeft3, Check, Refresh } from "iconsax-reactjs";
 
 type Message = {
     id: string;
@@ -76,9 +76,9 @@ export default function InboxPage() {
             <header className="sticky top-0 z-50 h-15 w-full backdrop-blur-xl bg-[#100d10]/75 border-b border-white/[0.08] px-4 sm:px-8 py-3.5 flex justify-between items-center">
                 <Link
                     href={`/room/${room}`}
-                    className="text-xs font-mono uppercase tracking-wider text-[#a69b9d] hover:text-[#ffb0a7] transition-colors flex items-center gap-1.5"
+                    className="text-md tracking-wider text-[#a69b9d] hover:text-[#ffb0a7] transition-colors flex items-center gap-1.5"
                 >
-                    <ArrowLeft3 color="#f4eee9" size={20} /> voltar para sala
+                    <ArrowLeft3 color="#a69b9d" size={17} /> <span className="text-[#a69b9d]">Voltar para sala</span>
                 </Link>
                 <span className="font-mono text-xs uppercase tracking-widest text-[#a69b9d]">{room} / inbox</span>
             </header>
@@ -86,8 +86,8 @@ export default function InboxPage() {
             <main className="flex-1 w-full max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex flex-col gap-8">
                 <section className="flex justify-between items-end gap-4 pb-6 border-b border-white/[0.08]">
                     <div className="flex flex-col gap-2">
-                        <span className="font-mono text-xs uppercase tracking-widest text-[#a69b9d]">
-                            CAIXA DE ENTRADA
+                        <span className="text-xs tracking-widest text-[#a69b9d]">
+                            Caixa de entrada
                         </span>
                         <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#f4eee9]">
                             O que chegou
@@ -135,10 +135,10 @@ export default function InboxPage() {
                                 </p>
                                 <div className="flex justify-end pt-2">
                                     <button
-                                        className="font-mono text-xs uppercase tracking-wider text-[#a69b9d] hover:text-[#ee8b8d] transition-colors cursor-pointer bg-transparent border-0"
+                                        className="text-xs tracking-wider text-[#a69b9d] hover:text-[#ee8b8d] transition-colors cursor-pointer bg-transparent border-0"
                                         onClick={() => markRead(message.id)}
                                     >
-                                        marcar como lida ✓
+                                        Marcar como lida <Check color="#a69b9d" size={16} />
                                     </button>
                                 </div>
                             </article>

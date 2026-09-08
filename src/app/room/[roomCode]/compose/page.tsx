@@ -94,9 +94,9 @@ export default function ComposePage() {
             <header className="sticky top-0 z-50 w-full h-15 backdrop-blur-xl bg-[#100d10]/75 border-b border-white/[0.08] px-4 sm:px-8 py-3.5 flex justify-between items-center">
                 <Link
                     href={`/room/${room}`}
-                    className="text-xs font-mono uppercase tracking-wider text-[#a69b9d] hover:text-[#ffb0a7] transition-colors flex items-center gap-2"
+                    className="text-mdtracking-wider text-[#a69b9d] hover:text-[#ffb0a7] transition-colors flex items-center gap-2"
                 >
-                    <ArrowLeft3 color="#fff" size={16} /> voltar para sala
+                    <ArrowLeft3 color="#a69b9d" size={17} /> <span className="text-[#a69b9d]">Voltar para sala</span>
                 </Link>
                 <span className="font-mono text-xs uppercase tracking-widest text-[#a69b9d]">{room}</span>
             </header>

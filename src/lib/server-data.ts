@@ -135,3 +135,14 @@ export function toMessage(row: MessageRow) {
         createdAt: new Date(row.created_at).getTime(),
     };
 }
+
+// Count unread messages for a specific room/recipient
+export async function countUnread(room: string, recipient: string): Promise<number> {
+    const query = new URLSearchParams({
+        room_code: `eq.${room}`,
+        to_name: `eq.${recipient}`,
+        read_at: "is.null",
+    });
+    const rows = await supabaseRequest<MessageRow[]>(`messages?${query}`);
+    return rows.length;
+}
