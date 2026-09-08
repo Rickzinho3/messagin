@@ -114,7 +114,7 @@ export default function InboxPage() {
                         <span className="text-sm text-[#a69b9d]">Quando chegar, ela aparece aqui.</span>
                     </div>
                 ) : (
-                    <section className="flex flex-col gap-4">
+                    <section className="flex-1 flex flex-col overflow-y-auto gap-4">
                         {messages.map((message) => (
                             <article
                                 className="p-6 rounded-3xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl flex flex-col gap-4 shadow-lg shadow-black/20"
