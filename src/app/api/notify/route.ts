@@ -53,7 +53,7 @@ async function sendOneSignalPush(input: {
             },
             url: roomUrl,
             priority: 10,
-            chrome_web_icon: "https://ibb.co/kgp25cdg",
+            chrome_web_icon: "https://i.ibb.co/ccPhkTmc/Would-I-date-you-quiz.jpg",
             web_buttons: [
                 {
                     id: "abrir-sala",
