@@ -4,7 +4,13 @@ import Link from "next/link";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 import { readSession, Session } from "@/lib/session";
-import { ArrowLeft3 } from "iconsax-reactjs";
+import { ArrowLeft3, ArrowRight3, Refresh } from "iconsax-reactjs";
+import {
+    heatMessageForHim,
+    heatMessagesForHer,
+    lightMessages,
+    randomMessage,
+} from "@/lib/messages";
 
 export default function ComposePage() {
     const params = useParams<{ roomCode: string }>();
@@ -35,6 +41,18 @@ export default function ComposePage() {
             </main>
         );
     const currentSession = session;
+
+    function refreshMessage() {
+        if (type === "light") {
+            setMessage(randomMessage(lightMessages));
+        } else if (type === "heat") {
+            const heatList =
+                currentSession.gender === "ele"
+                    ? heatMessagesForHer
+                    : heatMessageForHim;
+            setMessage(randomMessage(heatList));
+        }
+    }
 
     async function send(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -101,17 +119,28 @@ export default function ComposePage() {
                     className="bg-white/[0.04] border border-white/[0.08] backdrop-blur-2xl rounded-3xl p-6 sm:p-8 shadow-2xl shadow-black/40 flex flex-col gap-6"
                 >
                     <label className="flex flex-col gap-3 text-sm text-[#f4eee9]">
-                        <span className="font-medium text-[#a69b9d]">
-                            Mensagem para <b className="text-[#f4eee9]">{session.otherName}</b>
-                        </span>
+                        <div className="flex justify-between items-center">
+                            <span className="font-medium text-[#a69b9d]">
+                                Mensagem para <b className="text-[#f4eee9]">{session.otherName}</b>
+                            </span>
+                            {type !== "custom" && (
+                                <button
+                                    type="button"
+                                    onClick={refreshMessage}
+                                    className="flex items-center gap-1.5 text-xs font-mono text-[#a69b9d] hover:text-[#ffb0a7] transition-colors cursor-pointer bg-transparent border-0"
+                                >
+                                    <Refresh size={14} color="#a69b9d" /> sortear outra
+                                </button>
+                            )}
+                        </div>
                         <textarea
                             value={message}
                             onChange={(event) => setMessage(event.target.value)}
                             placeholder="Digite seu sinal..."
                             maxLength={240}
-                            disabled={type != "custom"}
+                            disabled={type !== "custom"}
                             rows={4}
-                            className="w-full bg-white/[0.05] border border-white/[0.12] rounded-2xl p-4 text-[#f4eee9] placeholder:text-white/30 focus:outline-none focus:border-[#ee8b8d] focus:ring-1 focus:ring-[#ee8b8d] transition-all resize-none text-base leading-relaxed"
+                            className="w-full bg-white/[0.05] border border-white/[0.12] rounded-2xl p-4 text-[#f4eee9] placeholder:text-white/30 focus:outline-none focus:border-[#ee8b8d] focus:ring-1 focus:ring-[#ee8b8d] transition-all resize-none text-base leading-relaxed disabled:opacity-80"
                         />
                     </label>
 
@@ -124,7 +153,7 @@ export default function ComposePage() {
                             disabled={sending}
                             type="submit"
                         >
-                            {sending ? "enviando..." : "enviar sinal ↗"}
+                            {sending ? "enviando..." : (<>Enviar <ArrowRight3 color="#000" size={17} /></>)}
                         </button>
                     </div>
 
