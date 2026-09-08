@@ -23,11 +23,13 @@ async function sendOneSignalPush(input: {
     from: string;
     message: string;
 }) {
-    const oneSignalAppId = process.env.NEXT_PUBLIC_ONESIGNAL_APP_ID?.trim();
+    const oneSignalAppId =
+        process.env.NEXT_PUBLIC_ONESIGNAL_APP_ID?.trim() ||
+        "1e493154-a38f-413e-8cde-de0c81524cbd";
     const oneSignalApiKey = process.env.ONESIGNAL_REST_API_KEY?.trim();
 
-    if (!oneSignalAppId || !oneSignalApiKey) {
-        throw new Error("OneSignal não está configurado na Vercel");
+    if (!oneSignalApiKey) {
+        throw new Error("ONESIGNAL_REST_API_KEY não configurada na Vercel");
     }
 
     const roomUrl = `https://messagin-sage.vercel.app/room/${input.room}`;

@@ -33,13 +33,19 @@ export function OneSignalBootstrap() {
 }
 
 export function connectPush(room: string, name: string) {
-    const appId = process.env.NEXT_PUBLIC_ONESIGNAL_APP_ID;
+    const appId =
+        process.env.NEXT_PUBLIC_ONESIGNAL_APP_ID?.trim() ||
+        "1e493154-a38f-413e-8cde-de0c81524cbd";
     if (!appId || typeof window === "undefined") return;
 
     window.OneSignalDeferred = window.OneSignalDeferred || [];
     window.OneSignalDeferred.push(async (oneSignal) => {
-        await oneSignal.init({ appId, allowLocalhostAsSecureOrigin: true });
-        await oneSignal.login(makeOneSignalId(room, name));
-        await oneSignal.Notifications.requestPermission();
+        try {
+            await oneSignal.init({ appId, allowLocalhostAsSecureOrigin: true });
+            await oneSignal.login(makeOneSignalId(room, name));
+            await oneSignal.Notifications.requestPermission();
+        } catch (e) {
+            console.error("OneSignal push connect error:", e);
+        }
     });
 }

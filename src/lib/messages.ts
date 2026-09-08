@@ -27,7 +27,7 @@ export const heatMessagesForHer = [
   "Sua xota latejando de tesão já tá me deixando duro pra caralho",
   "Quero te foder no espelho pra você ver essa cara de puta gozando",
   "Vou te chupar tão forte que você vai gozar só com a língua",
-  "Me usa, monta nessa rola e rebola até eu gozar dentro de você",
+  "Me usa, monta na minha rola e rebola até eu gozar dentro de você",
   "Hoje você vai sair mancando de tanto eu te comer gostoso"
 ];
 
