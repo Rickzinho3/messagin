@@ -30,6 +30,8 @@ async function sendOneSignalPush(input: {
         throw new Error("OneSignal não está configurado na Vercel");
     }
 
+    const roomUrl = `https://messagin-sage.vercel.app/room/${input.room}`;
+
     const response = await fetch("https://api.onesignal.com/notifications", {
         method: "POST",
         headers: {
@@ -49,9 +51,20 @@ async function sendOneSignalPush(input: {
                         ? `${input.message.slice(0, 97)}...`
                         : input.message,
             },
-            url: "/",
-            chrome_web_icon: "",
-            priority: 10
+            url: roomUrl,
+            priority: 10,
+            web_buttons: [
+                {
+                    id: "abrir-sala",
+                    text: "Responder",
+                    url: roomUrl
+                },
+                {
+                    id: "ver-mensagem",
+                    text: "Ver mensagem",
+                    url: `${roomUrl}/inbox`
+                }
+            ]
         }),
     });
 
