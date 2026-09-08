@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { connectPush } from "@/components/OneSignalBootstrap";
 import { saveSession } from "@/lib/session";
 import { ArrowRight3 } from "iconsax-reactjs";
+import { Loader } from "@/components/motion/loader";
 
 export default function EntryPage() {
     const router = useRouter();
@@ -13,6 +14,7 @@ export default function EntryPage() {
     const [room, setRoom] = useState("");
     const [gender, setGender] = useState<"ele" | "ela">("ele");
     const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false)
 
     function enter(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -111,18 +113,19 @@ export default function EntryPage() {
                             </label>
                         </div>
 
+
+                        <button
+                            className="w-full h-12 bg-gradient-to-r from-[#ee8b8d] to-[#ffb0a7] text-[#100d10] font-semibold py-3.5 px-6 rounded-xl hover:opacity-95 active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#ee8b8d]/20 cursor-pointer mt-2"
+                            type="submit"
+                            onClick={() => setLoading(true)}
+                            >
+                            {loading ? <Loader variant="dots" size={18} className="text-[#100d10]" /> : <>Entrar <ArrowRight3 size={18} color="#100d10" /></>}
+                        </button>
                         {error && (
                             <p className="text-red-400 text-xs font-medium bg-red-500/10 border border-red-500/20 rounded-lg p-3">
                                 {error}
                             </p>
                         )}
-
-                        <button
-                            className="w-full bg-gradient-to-r from-[#ee8b8d] to-[#ffb0a7] text-[#100d10] font-semibold py-3.5 px-6 rounded-xl hover:opacity-95 active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#ee8b8d]/20 cursor-pointer mt-2"
-                            type="submit"
-                        >
-                            Entrar na sala <ArrowRight3 size={18} color="#100d10" />
-                        </button>
                     </form>
 
                     <p className="text-xs text-[#a69b9d] text-center font-mono">
