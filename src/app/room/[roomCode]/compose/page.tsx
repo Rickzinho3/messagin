@@ -103,8 +103,8 @@ export default function ComposePage() {
 
             <main className="flex-1 w-full max-w-2xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex flex-col gap-8">
                 <div className="flex flex-col gap-2">
-                    <span className="font-mono text-xs uppercase tracking-widest text-[#a69b9d]">
-                        COMPOSITOR / {type}
+                    <span className="text-xs tracking-widest text-[#a69b9d]">
+                        Compositor / {type}
                     </span>
                     <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#f4eee9]">
                         O que você quer que apareça para <em>{currentSession.gender === "ele" ? "ela" : "ele"}</em> ?
@@ -116,7 +116,7 @@ export default function ComposePage() {
 
                 <form
                     onSubmit={send}
-                    className="bg-white/[0.04] border border-white/[0.08] backdrop-blur-2xl rounded-3xl p-6 sm:p-8 shadow-2xl shadow-black/40 flex flex-col gap-6"
+                    className="bg-white/[0.04] border border-white/[0.08] backdrop-blur-2xl rounded-3xl p-4 sm:p-8 shadow-2xl shadow-black/40 flex flex-col gap-6"
                 >
                     <label className="flex flex-col gap-3 text-sm text-[#f4eee9]">
                         <div className="flex justify-between items-center">
@@ -127,9 +127,9 @@ export default function ComposePage() {
                                 <button
                                     type="button"
                                     onClick={refreshMessage}
-                                    className="flex items-center bg-gradient-to-r from-[#ee8b8d] to-[#ffb0a7] py-2 px-3 rounded-2xl gap-1.5 text-xs font-mono text-[#100d10] transition-colors cursor-pointer bg-transparent border-0"
+                                    className="flex items-center bg-gradient-to-r from-[#ee8b8d] to-[#ffb0a7] p-2 rounded-full gap-1.5 text-xs font-mono text-[#100d10] transition-colors cursor-pointer bg-transparent border-0"
                                 >
-                                    <Refresh size={14} color="#100d10" /> sortear outra
+                                    <Refresh size={17} color="#100d10" />
                                 </button>
                             )}
                         </div>
@@ -140,20 +140,20 @@ export default function ComposePage() {
                             maxLength={240}
                             disabled={type !== "custom"}
                             rows={4}
-                            className="w-full bg-white/[0.05] border border-white/[0.12] rounded-2xl p-4 text-[#f4eee9] placeholder:text-white/30 focus:outline-none focus:border-[#ee8b8d] focus:ring-1 focus:ring-[#ee8b8d] transition-all resize-none text-base leading-relaxed disabled:opacity-80"
+                            className="w-full bg-white/[0.05] border border-white/[0.12] rounded-2xl p-4 text-[#f4eee9] placeholder:text-white/30 focus:outline-none focus:border-[#ee8b8d] focus:ring-1 focus:ring-[#ee8b8d] transition-all resize-none"
                         />
+                        <span className="text-[#a69b9d]">
+                            {message.length}/240
+                        </span>
                     </label>
 
                     <div className="flex justify-between items-center pt-2">
-                        <span className="font-mono text-xs text-[#a69b9d]">
-                            {message.length}/240
-                        </span>
                         <button
-                            className="bg-gradient-to-r from-[#ee8b8d] to-[#ffb0a7] text-[#100d10] font-semibold py-3 px-6 rounded-xl hover:opacity-95 active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#ee8b8d]/20 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="bg-gradient-to-r from-[#ee8b8d] to-[#ffb0a7] text-[#100d10] w-full font-semibold py-3 px-6 rounded-xl hover:opacity-95 active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#ee8b8d]/20 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                             disabled={sending}
                             type="submit"
                         >
-                            {sending ? "enviando..." : (<>Enviar <ArrowRight3 color="#000" size={17} /></>)}
+                            {sending ? "enviando..." : (<>Enviar <ArrowRight3 color="#100d10" size={20} /></>)}
                         </button>
                     </div>
 
