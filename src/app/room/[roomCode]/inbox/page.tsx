@@ -6,6 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 import { readSession, Session } from "@/lib/session";
 import { ArrowLeft3, Check, Refresh } from "iconsax-reactjs";
 import { Loader } from "@/components/motion/loader";
+import { CheckIcon } from "lucide-react";
 
 type Message = {
     id: string;
@@ -72,7 +73,7 @@ export default function InboxPage() {
         );
 
     return (
-        <div className="min-h-screen w-full flex flex-col bg-[#100d10] text-[#f4eee9] overflow-hidden">
+        <div className="h-screen w-full flex flex-col bg-[#100d10] text-[#f4eee9] overflow-hidden">
             {/* Header Fixo */}
             <header className="sticky top-0 z-50 h-15 w-full backdrop-blur-xl bg-[#100d10]/75 border-b border-white/[0.08] px-4 sm:px-8 py-3.5 flex justify-between items-center">
                 <Link
@@ -84,8 +85,8 @@ export default function InboxPage() {
                 <span className="font-mono text-xs uppercase tracking-widest text-[#a69b9d]">{room} / inbox</span>
             </header>
 
-            <main className="flex-1 w-full max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex flex-col gap-8">
-                <section className="flex justify-between items-end gap-4 pb-6 border-b border-white/[0.08]">
+            <main className="flex-1 w-full max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex flex-col gap-8 min-h-0 overflow-hidden">
+                <section className="flex-shrink-0 flex justify-between items-end gap-4 pb-6 border-b border-white/[0.08]">
                     <div className="flex flex-col gap-2">
                         <span className="text-xs tracking-widest text-[#a69b9d]">
                             Caixa de entrada
@@ -136,10 +137,10 @@ export default function InboxPage() {
                                 </p>
                                 <div className="flex justify-end pt-2">
                                     <button
-                                        className="text-xs flex bg-gradient-to-r from-[#ee8b8d] px-1 py-2 rounded-xl to-[#ffb0a7] text-[#100d10] items-center gap-2 tracking-wider transition-colors cursor-pointer border-0"
+                                        className="text-xs flex bg-gradient-to-r from-[#ee8b8d] px-2 py-2 rounded-full to-[#ffb0a7] text-[#100d10] items-center gap-2 tracking-wider transition-colors cursor-pointer border-0"
                                         onClick={() => markRead(message.id)}
                                     >
-                                        Marcar como lida <Check color="#100d10" size={16} />
+                                        <CheckIcon color="#100d10" size={16} />
                                     </button>
                                 </div>
                             </article>
