@@ -36,7 +36,7 @@ export const heatMessageForHim = [
   "Vou sentar gostoso nessa rola e rebolar até você gemer meu nome alto",
   "Me fode com força, quero sentir essa rola latejando dentro da minha buceta",
   "Quero lamber suas bolas e chupar a cabeça da sua pica bem devagar",
-  "Vou te dar o cuzinho apertado e te deixar gozar bem fundo em mim",
+  "Vou te dar meu cuzinho e te deixar gozar bem fundo em mim",
   "Me deixa de quatro e enfia essa rola com tudo, sem dó nenhuma",
   "Quero sentir você gozando quente dentro de mim enquanto eu aperto",
   "Vou te masturbar bem gostoso e chupar até a última gota",

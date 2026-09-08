@@ -11,6 +11,7 @@ import {
     lightMessages,
     randomMessage,
 } from "@/lib/messages";
+import { Loader } from "@/components/motion/loader";
 
 export default function ComposePage() {
     const params = useParams<{ roomCode: string }>();
@@ -149,11 +150,11 @@ export default function ComposePage() {
 
                     <div className="flex justify-between items-center pt-2">
                         <button
-                            className="bg-gradient-to-r from-[#ee8b8d] to-[#ffb0a7] text-[#100d10] w-full font-semibold py-3 px-6 rounded-xl hover:opacity-95 active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#ee8b8d]/20 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="bg-gradient-to-r from-[#ee8b8d] to-[#ffb0a7] text-[#100d10] w-full h-12  font-semibold py-3 px-6 rounded-xl hover:opacity-95 active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#ee8b8d]/20 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                             disabled={sending}
                             type="submit"
                         >
-                            {sending ? "enviando..." : (<>Enviar <ArrowRight3 color="#100d10" size={20} /></>)}
+                            {sending ? (<Loader variant="dots" size={20} />) : (<>Enviar <ArrowRight3 color="#100d10" size={20} /></>)}
                         </button>
                     </div>
 

@@ -12,6 +12,7 @@ import {
 } from "@/lib/messages";
 import { readSession, clearSession, Session } from "@/lib/session";
 import { ArrowLeft3, ArrowRight3, DirectInbox, DirectRight, Edit2, Heart, HeartEdit, Lovely } from "iconsax-reactjs";
+import { Loader } from "@/components/motion/loader";
 
 export default function RoomPage() {
     const params = useParams<{ roomCode: string }>();
@@ -49,8 +50,8 @@ export default function RoomPage() {
 
     if (!session)
         return (
-            <main className="page-frame loading-state">
-                Abrindo sua sala...
+            <main className="page-frame flex flex-col justify-center items-center">
+                <Loader className="text-[#ffb0a7] animate-spin"/>
             </main>
         );
 

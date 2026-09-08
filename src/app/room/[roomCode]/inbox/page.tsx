@@ -5,6 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { readSession, Session } from "@/lib/session";
 import { ArrowLeft3, Check, Refresh } from "iconsax-reactjs";
+import { Loader } from "@/components/motion/loader";
 
 type Message = {
     id: string;
@@ -65,8 +66,8 @@ export default function InboxPage() {
 
     if (!session)
         return (
-            <main className="min-h-screen w-full flex items-center justify-center font-mono text-sm text-[#a69b9d]">
-                Abrindo inbox...
+            <main className="min-h-screen w-full flex flex-col items-center justify-center font-mono text-sm text-[#a69b9d]">
+                <Loader className="text-[#ffb0a7] animate-spin"/>
             </main>
         );
 
@@ -105,7 +106,7 @@ export default function InboxPage() {
 
                 {loading ? (
                     <div className="py-20 text-center font-mono text-sm text-[#a69b9d]">
-                        Buscando sinais...
+                       <Loader variant="percent" className="text-[#a69b9d]"/>
                     </div>
                 ) : messages.length === 0 ? (
                     <div className="py-20 text-center flex flex-col gap-2">
