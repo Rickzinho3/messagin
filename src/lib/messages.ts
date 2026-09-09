@@ -61,7 +61,7 @@ export const heatMessageForHim = [
   "Quero sentir essa rola me abrindo enquanto você me xinga",
   "Me engasga com essa rola e depois me fode até eu gozar",
   "Vou te chupar de quatro enquanto você mete os dedos em mim",
-  "Me enchhe toda de leite, quero ficar pingando",
+  "Me enche toda de leite, quero ficar pingando",
   "Eu sou sua putinha por completo",
   "Vou sentar na sua cara e gozar pra você"
 ];
